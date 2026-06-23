@@ -1,0 +1,31 @@
+{
+  "name": "gridfpv-docs",
+  "version": "1.0.0",
+  "description": "GridFPV user documentation (VitePress)",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GridFPV/docs.git"
+  },
+  "keywords": [
+    "gridfpv",
+    "fpv",
+    "drone-racing",
+    "documentation",
+    "vitepress"
+  ],
+  "author": "GridFPV",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/GridFPV/docs/issues"
+  },
+  "homepage": "https://github.com/GridFPV/docs#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
