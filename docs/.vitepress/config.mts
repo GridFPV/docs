@@ -1,9 +1,9 @@
 import { defineConfig } from 'vitepress'
 
 // GridFPV user documentation site.
-// Note: `base` is set for GitHub Pages project-site hosting (https://gridfpv.github.io/docs/).
-// Override with the DOCS_BASE env var if the site is ever served from a custom domain root.
-const base = process.env.DOCS_BASE ?? '/docs/'
+// Note: served at the custom-domain root (https://docs.gridfpv.com/), so `base` is `/`.
+// Override with the DOCS_BASE env var for alternate hosting (e.g. a project-site subpath).
+const base = process.env.DOCS_BASE ?? '/'
 
 export default defineConfig({
   base,
