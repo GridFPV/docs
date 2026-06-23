@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/GridFPV/docs#readme",
   "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
     "vitepress": "^1.6.4"
   }
 }

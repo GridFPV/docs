@@ -1,0 +1,163 @@
+/**
+ * GridFPV docs theme — re-skins VitePress to match the GridFPV application's
+ * "broadcast-console" look: a cool, blue-tinted dark slate canvas with an
+ * electric "grid green" brand accent and Inter type.
+ *
+ * The values here are the app's design tokens
+ * (frontend/packages/components/src/tokens.css) mapped onto VitePress's CSS
+ * custom properties. The site is dark by default (see config `appearance`),
+ * which is the app's baseline; a light mode is provided that maps the same
+ * semantic roles onto a clean white canvas.
+ */
+
+/* ── Type ────────────────────────────────────────────────────────────────── */
+:root {
+  --vp-font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Roboto Mono',
+    'Cascadia Code', monospace;
+}
+
+/* ── Brand / accent ramp (grid green) — shared across light & dark ───────────
+ * brand-1 = primary text/link accent, brand-2 = hover, brand-3 = solid bg/active.
+ * GridFPV ramp: 500 #10d191 · 400 #34e6a8 · 600 #06a874 · 300 #6ff7c8. */
+:root {
+  --vp-c-brand-1: #34e6a8;
+  --vp-c-brand-2: #10d191;
+  --vp-c-brand-3: #10d191;
+  --vp-c-brand-soft: rgba(16, 209, 145, 0.16);
+  --vp-c-brand-softer: rgba(16, 209, 145, 0.1);
+  --vp-c-brand-light: #6ff7c8;
+  --vp-c-brand-lighter: #6ff7c8;
+  --vp-c-brand-dark: #06a874;
+  --vp-c-brand-darker: #097a57;
+
+  /* Legacy aliases some components still read. */
+  --vp-c-brand: var(--vp-c-brand-1);
+  --vp-c-brand-text: #04140f; /* text on the solid green button */
+
+  /* Focus ring = green. */
+  --vp-c-gutter: var(--vp-c-divider);
+}
+
+/* ── Dark theme (the baseline) ───────────────────────────────────────────────
+ * Neutral slate ramp: 0 #0a0d12 · 50 #0e1218 · 100 #131820 · 150 #181e28 ·
+ * 200 #1d2531 · 300 #28323f · 400 #3a4658 · 600 #788699 · 800 #c2cad4 ·
+ * 1000 #f7f9fb. Surface=#0e1218, sunken=#0a0d12, alt=#131820, elevated=#181e28. */
+.dark {
+  /* Backgrounds */
+  --vp-c-bg: #0e1218;
+  --vp-c-bg-alt: #0a0d12;
+  --vp-c-bg-soft: #131820;
+  --vp-c-bg-elv: #181e28;
+  --vp-c-bg-soft-up: #1d2531;
+
+  /* Surfaces (cards, code blocks, search box) */
+  --vp-c-bg-mute: #131820;
+
+  /* Borders / dividers */
+  --vp-c-divider: #28323f;
+  --vp-c-border: #28323f;
+  --vp-c-gutter: #0a0d12;
+
+  /* Text */
+  --vp-c-text-1: #f7f9fb;
+  --vp-c-text-2: #c2cad4;
+  --vp-c-text-3: #788699;
+
+  /* Grid-green accent in dark uses the brighter step for contrast. */
+  --vp-c-brand-1: #34e6a8;
+  --vp-c-brand-2: #6ff7c8;
+  --vp-c-brand-3: #10d191;
+  --vp-c-brand-soft: rgba(16, 209, 145, 0.16);
+  --vp-c-brand-softer: rgba(16, 209, 145, 0.08);
+
+  /* Neutral default-color roles (used by buttons/tags) tinted to the slate. */
+  --vp-c-default-1: #3a4658;
+  --vp-c-default-2: #28323f;
+  --vp-c-default-3: #1d2531;
+  --vp-c-default-soft: rgba(58, 70, 88, 0.4);
+}
+
+/* ── Light theme — same semantic roles on a clean canvas ─────────────────────
+ * Mirrors the app's light theme: white surfaces, a deeper green for contrast. */
+:root:not(.dark) {
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f4f6f9;
+  --vp-c-bg-soft: #f4f6f9;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-mute: #eef1f5;
+
+  --vp-c-divider: #dce0e6;
+  --vp-c-border: #dce0e6;
+
+  --vp-c-text-1: #0c1118;
+  --vp-c-text-2: #2c3440;
+  --vp-c-text-3: #5d6775;
+
+  /* Deeper green so links/buttons hold contrast on white. */
+  --vp-c-brand-1: #06a874;
+  --vp-c-brand-2: #097a57;
+  --vp-c-brand-3: #10d191;
+  --vp-c-brand-soft: rgba(6, 168, 116, 0.12);
+  --vp-c-brand-softer: rgba(6, 168, 116, 0.06);
+}
+
+/* ── Component roles ─────────────────────────────────────────────────────────
+ * Nav / sidebar surfaces, buttons, and focus rings tied to the palette. */
+:root {
+  /* Solid brand button: green fill, near-black text (matches the app). */
+  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-hover-bg: #34e6a8;
+  --vp-button-brand-active-bg: #06a874;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-text: #04140f;
+  --vp-button-brand-hover-text: #04140f;
+  --vp-button-brand-active-text: #04140f;
+
+  /* Nav bar + sidebar background pinned to the canvas. */
+  --vp-nav-bg-color: var(--vp-c-bg);
+  --vp-sidebar-bg-color: var(--vp-c-bg-alt);
+  --vp-local-nav-bg-color: var(--vp-c-bg);
+
+  /* Code block background. */
+  --vp-code-block-bg: var(--vp-c-bg-alt);
+
+  /* Custom-block (tip/info) accent = green. */
+  --vp-custom-block-tip-border: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-text: var(--vp-c-brand-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-softer);
+}
+
+/* ── Home hero — green brand treatment on the dark canvas ─────────────────────
+ * The hero "name" uses the grid-green ramp as a subtle gradient, echoing the
+ * live-feed glow of the app. */
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    120deg,
+    #6ff7c8 10%,
+    #10d191 60%,
+    #06a874
+  );
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(16, 209, 145, 0.28),
+    rgba(111, 247, 200, 0.18)
+  );
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+/* A faint grid-green glow under the hero on dark, for the "broadcast" feel. */
+.dark .VPHero .text {
+  color: var(--vp-c-text-1);
+}
+
+/* Focus ring color → green (accessibility + on-brand). */
+:root {
+  --vp-c-focus: var(--vp-c-brand-1);
+}

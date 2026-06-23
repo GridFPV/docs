@@ -13,7 +13,19 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  // Default to dark mode — the GridFPV app is a dark "broadcast-console" baseline.
+  // A toggle to light remains available (custom theme maps both).
+  appearance: 'dark',
+
+  // Favicon (the app's grid-green "G" mark). `base` is `/`, so an absolute path works.
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }]
+  ],
+
   themeConfig: {
+    // Nav logo (top-left) — the app's mark.
+    logo: '/favicon.svg',
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/guide/getting-started' },
