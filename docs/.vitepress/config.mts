@@ -47,9 +47,39 @@ export default defineConfig({
           text: 'Guide',
           items: [
             { text: 'Getting Started', link: '/guide/getting-started' },
-            { text: 'Running an Event', link: '/guide/running-an-event' },
-            { text: 'Round Formats', link: '/guide/formats' },
-            { text: 'Connecting a Timer', link: '/guide/timers' },
+            {
+              text: 'Running an Event',
+              link: '/guide/running-an-event',
+              collapsed: true,
+              items: [
+                { text: 'The setup wizard', link: '/guide/running-an-event#the-setup-wizard' },
+                { text: 'Classes & Roster', link: '/guide/running-an-event#stage-1-classes-roster' },
+                { text: 'Rounds & Heats', link: '/guide/running-an-event#stage-2-rounds-heats' },
+                { text: 'Live Control', link: '/guide/running-an-event#stage-3-live-control' },
+                { text: 'Marshaling', link: '/guide/running-an-event#stage-4-marshaling' },
+                { text: 'Results', link: '/guide/running-an-event#stage-5-results' }
+              ]
+            },
+            {
+              text: 'Round Formats',
+              link: '/guide/formats',
+              collapsed: true,
+              items: [
+                { text: 'The formats', link: '/guide/formats#the-formats' },
+                { text: 'Win conditions', link: '/guide/formats#win-conditions' }
+              ]
+            },
+            {
+              text: 'Connecting a Timer',
+              link: '/guide/timers',
+              collapsed: true,
+              items: [
+                { text: 'The Mock timer', link: '/guide/timers#the-built-in-mock-timer' },
+                { text: 'RotorHazard', link: '/guide/timers#rotorhazard' },
+                { text: 'Channels vs nodes', link: '/guide/timers#channels-vs-nodes' },
+                { text: 'The heat lifecycle', link: '/guide/timers#the-heat-lifecycle' }
+              ]
+            },
             { text: 'FAQ', link: '/guide/faq' }
           ]
         }
