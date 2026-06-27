@@ -55,7 +55,7 @@ export default defineConfig({
                 { text: 'The setup wizard', link: '/guide/running-an-event#the-setup-wizard' },
                 { text: 'Classes & Roster', link: '/guide/running-an-event#stage-1-classes-roster' },
                 { text: 'Rounds & Heats', link: '/guide/running-an-event#stage-2-rounds-heats' },
-                { text: 'Live Control', link: '/guide/running-an-event#stage-3-live-control' },
+                { text: 'Race Control', link: '/guide/running-an-event#stage-3-race-control' },
                 { text: 'Marshaling', link: '/guide/running-an-event#stage-4-marshaling' },
                 { text: 'Results', link: '/guide/running-an-event#stage-5-results' }
               ]

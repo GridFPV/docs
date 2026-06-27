@@ -111,7 +111,7 @@ durable registries you build up over time, and each event just picks from them.
    you can learn the whole flow without any hardware. (See
    [Connecting a Timer](/guide/timers).)
 3. Open **Events**, create a new event, and open it. You land in the **event workspace** — a
-   left-to-right sequence of stage pages (Classes & Roster → Rounds & Heats → Live Control →
+   left-to-right sequence of stage pages (Classes & Roster → Rounds & Heats → Race Control →
    Marshaling → Results) that walk you through setting up and running the day. A guided setup
    wizard can do the common path for you.
 4. Schedule a heat, **Stage** it, **Start** it, and watch the Mock timer drive a live race

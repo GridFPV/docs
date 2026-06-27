@@ -7,7 +7,7 @@ GridFPV yet, start with [Getting Started](/guide/getting-started) and add a
 
 The **event workspace** is a left-to-right sequence of **stage pages**:
 
-**Classes & Roster → Rounds & Heats → Live Control → Marshaling → Results**
+**Classes & Roster → Rounds & Heats → Race Control → Marshaling → Results**
 
 You move through them in order, but you can revisit any stage at any time. There is no
 separate "edit" mode — setting an event up is just visiting its early stages. Most choices
@@ -146,7 +146,7 @@ With a round defined, build its heats:
   and the round's win condition becomes the ranking that seeds your bracket. For brackets, use
   **Advance to bracket** once qualifying is scored.
 
-## Stage 3 — Live Control {#stage-3-live-control}
+## Stage 3 — Race Control {#stage-3-race-control}
 
 This is the race-running cockpit. You drive **one heat at a time** through its lifecycle and
 watch it play out. For the full state-by-state detail, see
@@ -197,18 +197,37 @@ confirmation because they throw away the current attempt.
 
 ## Stage 4 — Marshaling {#stage-4-marshaling}
 
-Marshaling is where you **correct an Unofficial heat** before locking it. Open it for the
-current heat to review each pilot's laps, then:
+Marshaling is where you **correct a heat's result** before (or after) locking it.
 
-- **Insert a missed lap** — pick the pilot and the time it should have crossed.
+### Pick what to marshal
+
+- **Marshal heat** — a dropdown to choose *which heat* you're reviewing. It defaults to and
+  follows Race Control's current heat, but you can pin **any** heat to review it. Switching the
+  marshaled heat here **never** changes the heat Race Control is running — the two are
+  independent, so you can marshal a finished heat while the next one is staged.
+- **Marshal pilot** — a dropdown to focus on **one pilot at a time**, so the signal graph and
+  lap list stay uncluttered.
+
+### Correct the laps
+
+- **Insert a missed lap** — pick the pilot and the time it should have crossed (or click the
+  signal graph at that moment).
 - **Void / adjust a detection** — throw out a bad crossing, or correct a lap's time.
-- **Apply a penalty** — add time, or disqualify a pilot.
-- **Void the heat** — throw out the whole heat so it does not count (this asks for
-  confirmation).
+- **Throw out a lap** — drop a valid lap from the scored count without deleting it.
+- **Apply a penalty** — add time, deduct points, or disqualify a pilot.
+- **File / resolve a protest** — record a protest against a pilot and rule on it.
+
+### Set the result
+
+The **Heat result** controls act on the marshaled heat:
+
+- **Finalize → Official** when the heat is Unofficial — locks the result.
+- **Revert → Unofficial** when it's Official — re-opens a locked result for correction.
+- **Void heat** — throws out the whole heat so it does not count (asks for confirmation).
 
 Every correction **re-folds the result live** — standings and any advancement update
-immediately, because results are derived from the lap log. When the heat looks right, head
-back to Live Control and **Finalize**.
+immediately, because results are derived from the lap log. The lifecycle badge and these
+controls always reflect the **marshaled** heat, not Race Control's current one.
 
 ::: tip
 Marshaling today focuses on lap-level corrections. Deeper signal-based recovery (re-deriving

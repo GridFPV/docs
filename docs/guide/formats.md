@@ -37,7 +37,7 @@ starts.
 2. (Optional) set a **time limit** in minutes — leave it blank for no limit, and end the run
    manually.
 3. Pick the **active channels** — the timer node seats that are live for the session.
-4. In Live Control, run the heat and use **New run · clear board** to start each fresh
+4. In Race Control, run the heat and use **New run · clear board** to start each fresh
    practice run.
 
 Open Practice has no win condition and no ranking — it is purely flying time.
@@ -55,13 +55,24 @@ standard competitive opener.
 **How to set it up.**
 1. Add a round and choose the qualifying format (**Timed Qual**).
 2. Set **Heats per pilot** — how many heats each pilot flies (default 3). Best result counts.
-3. Choose the **win condition**, which doubles as the **ranking metric** (see below).
+   Set it to **0** to run the round **open-ended** — instead of a fixed number, the button
+   becomes **Generate next heat** and produces one more heat each time you ask, indefinitely,
+   until you stop. Great for "keep qualifying until we run out of time."
+3. Choose the **win condition**, which doubles as the **ranking metric** (see below). For
+   *Best Lap* and *Best N Consecutive* you also set a **Race time** — these formats are always
+   timed (you fly the window and your best result counts), so the race needs a length.
 4. Fill heats; each pilot appears across several heats on their fixed channel.
 
 ::: tip
 In qualifying, the win condition **is** the ranking. Pick *Best Lap* to rank by fastest lap,
 *Best N Consecutive* to rank by best consecutive laps, or *Timed — Most Laps* to rank by laps
 flown.
+:::
+
+::: tip Finalize to rank
+A round's ranking only counts heats you've **finalized**. Until you finalize a round's heats,
+its ranking won't be settled — so finalize each heat once you're happy with it (Marshaling or
+Race Control), then the ranking and any bracket seeding are ready.
 :::
 
 ### Round Robin
@@ -96,12 +107,21 @@ where you want to add depth as the day goes.
 **When to use it.** The competitive finale — a direct path to a winner.
 
 **How to set it up.**
-1. Run a qualifying round first to produce a ranking.
-2. Add a bracket round, set its **seeding** to **From ranking**, choose the qualifying round
-   as the source, and set **Top N advance** to take the top seeds.
-3. Set the **heat size** (default 2 for head-to-head).
+1. Run a qualifying round first and **finalize its heats** to produce a ranking.
+2. Add the first bracket round, set its **seeding** to **From ranking**, choose the qualifying
+   round as the source, and set **Top N advance** to take the top seeds. (The **Advance to
+   bracket** shortcut on a finished round does this for you.)
+3. Set the **heat size** (default 2 for head-to-head) and a **win condition** (e.g. *First to N
+   Laps* or *Timed*) so the matches end.
 4. Channels are assigned **per heat** from your timer's pool, so each match gets clean
-   frequencies. Use **Advance to bracket** to feed qualifying results in.
+   frequencies.
+
+::: info Each bracket level is its own round
+A bracket runs **one level per round** — Quarters, Semis, Final are separate rounds. After a
+level's heats finish, add the next round and set its **seeding** to **From heat winners**
+pointing at the previous level; the winners carry forward automatically. Repeat down to the
+final. (Double Elimination adds the losers'-bracket rounds the same way.)
+:::
 
 ### Multi-Main
 

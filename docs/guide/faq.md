@@ -91,7 +91,7 @@ download the visible standings and results for your own records or post-processi
 
 ## Can I run more than one track or event at once?
 
-One event runs one track at a time through Live Control. You can keep **multiple events** in
+One event runs one track at a time through Race Control. You can keep **multiple events** in
 your library and open whichever one you are running; create and switch between them from the
 **Events** page on the home hub.
 

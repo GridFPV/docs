@@ -25,7 +25,7 @@ To add or tune one:
 
 ::: tip Test the whole flow with the simulator
 Add a Mock timer, create an event, and run a heat through **Stage → Start → finish →
-Finalize**. It is the fastest way to learn live control and to sanity-check an event before
+Finalize**. It is the fastest way to learn race control and to sanity-check an event before
 you are at the field with real gear.
 :::
 
@@ -74,7 +74,7 @@ Per-pilot channels come from your event's **primary timer**:
 
 ## The heat lifecycle
 
-Every heat moves through the same clear sequence of states. Knowing them makes live control
+Every heat moves through the same clear sequence of states. Knowing them makes race control
 predictable:
 
 | State | What it means |
@@ -88,7 +88,7 @@ predictable:
 
 ### The race director's commands
 
-From Live Control you drive the heat with a few actions:
+From Race Control you drive the heat with a few actions:
 
 - **Stage** — move a Scheduled heat to Staged and start the staging countdown.
 - **Start** — arm a Staged heat and run the start procedure.
@@ -106,7 +106,7 @@ When you **Start** a staged heat, it arms and runs a start procedure before goin
 2. **A short randomized hold** — a brief delay (a couple of seconds, randomized) so pilots
    can't anticipate the exact go.
 3. **The start tone** — GridFPV plays the audible go-tone itself. There is a **Tone on/off**
-   toggle in Live Control if you need to mute it.
+   toggle in Race Control if you need to mute it.
 
 The instant the hold elapses, the heat moves to **Running** on its own — listen for the tone.
 
@@ -120,7 +120,7 @@ clock can't be trusted, **Force end** steps it to Unofficial immediately.
 
 ### Choosing the current heat
 
-Live Control runs **one heat at a time**. A heat picker at the top lets you choose which heat
+Race Control runs **one heat at a time**. A heat picker at the top lets you choose which heat
 is current — but it **locks once a heat is staged or running**, so you can't switch mid-race.
 Finalize or abort the current heat to unlock it. Filled heats are named **&lt;Round&gt; Heat
 N** (for example *Qualifying Heat 1*), which is what you'll see in the picker.
