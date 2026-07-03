@@ -112,8 +112,8 @@ stage, pick a timer, and give it some available channels. See
 
 ## Stage 2 — Rounds & Heats {#stage-2-rounds-heats}
 
-A **round** is a chunk of racing run with one [format](/guide/formats) — qualifying, a
-bracket, open practice, and so on. **Heats** are the lineups within a round that fly
+A **round** is a chunk of racing run with one [format](/guide/formats) — a time trial,
+a head-to-head final, a practice session, and so on. **Heats** are the lineups within a round that fly
 together.
 
 ### Define a round
@@ -121,14 +121,15 @@ together.
 1. Click **+ Add round**.
 2. Fill in the round form:
    - **Label** — a name like *Qualifying R1* or *Mains*.
-   - **Format** — Timed Qual, Round Robin, Single Elim, Open Practice, and more
+   - **Format** — the round type: Practice, Time Trials, or Head-to-Head
      ([Round Formats](/guide/formats)).
    - **Eligible class** — the class this round runs for.
    - **Win condition** — how the heat ends and pilots are ranked, e.g. *Timed — Most Laps*
      (see [Win conditions](/guide/formats#win-conditions)). Timed conditions ask for a
      **race time**; lap-count conditions ask for a **laps** number.
-   - **Seeding** — start **From roster**, or **From ranking** to seed from an earlier
-     qualifying round (pick the source round and a **Top N advance**).
+   - **Seeding** — start **From roster**, or **From ranking** to seed from earlier
+     rounds (pick one or more source rounds and **Take top** — how many pilots from that
+     ranking race here; the count is bounded by the source rounds' field).
    - **Start & timing** — staging time, the **start procedure** delay range, and the
      **grace window** (default 30s). The defaults are sensible; leave them unless you have a
      reason to change them.
@@ -138,13 +139,14 @@ together.
 
 With a round defined, build its heats:
 
-- Click **Fill next heat** to generate the next lineup automatically from your roster and
-  format, or use **+ Build heat** to pick pilots into a heat yourself.
+- Click **Generate heats** to build the round's lineups automatically from your roster and
+  format (an open-ended round offers **Generate next heat**, one at a time), or use
+  **+ Build heat** to pick pilots into a heat yourself.
 - Filled heats are named **&lt;Round&gt; Heat N** — for example *Qualifying Heat 1*,
-  *Qualifying Heat 2*. Open Practice produces a single *Open Practice Heat*.
-- For qualifying, each pilot flies several heats ("Heats per pilot") on their fixed channel,
-  and the round's win condition becomes the ranking that seeds your bracket. For brackets, use
-  **Advance to bracket** once qualifying is scored.
+  *Qualifying Heat 2*. A Practice round produces a single *Practice Heat*.
+- For Time Trials, each pilot flies several heats ("Heats per pilot") on their fixed channel,
+  and the round's win condition becomes the ranking. A later round — say a Head-to-Head
+  final — seeds **From ranking** off it.
 
 ## Stage 3 — Race Control {#stage-3-race-control}
 
@@ -176,7 +178,7 @@ Finalize or abort the current heat first.
 ### Watch the race
 
 While Running, the **heat clock** counts up and the **live standing** updates per pilot
-(laps, last lap, best lap). In Open Practice you get a **practice board** per channel instead,
+(laps, last lap, best lap). In Practice you get a **practice board** per channel instead,
 with a **New run · clear board** button to start a fresh run.
 
 The race **ends on its own** when the win condition is met, plus the grace window (default
@@ -241,8 +243,9 @@ The Results stage shows your **standings and finished results**:
 
 - **Per-class standings** aggregated across that class's rounds — position, pilot, points,
   best lap, laps, and rounds entered. Use the class selector to switch classes.
-- **Heat result**, **ranking**, and **bracket** views for the event as data comes in.
-- **Export JSON** to download the visible results for your own records or post-processing.
+- **Round standings** for each scored round as data comes in.
+- **Export JSON** to download the visible results (with pilot callsigns, not internal ids)
+  for your own records or post-processing.
 
 Standings populate as heats are scored, so this stage fills in naturally as the day runs.
 

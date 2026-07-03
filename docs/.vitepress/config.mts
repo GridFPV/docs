@@ -65,7 +65,8 @@ export default defineConfig({
               link: '/guide/formats',
               collapsed: true,
               items: [
-                { text: 'The formats', link: '/guide/formats#the-formats' },
+                { text: 'The round types', link: '/guide/formats#the-round-types' },
+                { text: 'Seeding', link: '/guide/formats#seeding-chaining-rounds-together' },
                 { text: 'Win conditions', link: '/guide/formats#win-conditions' }
               ]
             },

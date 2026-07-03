@@ -1,29 +1,25 @@
 # Round Formats
 
-A **format** decides how a round is structured — who flies, in what order, and how they
-advance. GridFPV treats formats as pluggable, so the same race-running flow powers everything
-from a casual practice session to a full elimination bracket. This page helps you pick one and
-set it up.
+A **round type** decides how a round is structured — who flies, in what order, and how the
+round ranks its pilots. You choose one **per round** on the
+[Rounds & Heats](/guide/running-an-event#stage-2-rounds-heats) stage, and chain rounds
+together with **seeding** — for example *Practice*, then *Time Trials*, then a *Head-to-Head*
+final seeded from the time-trial ranking.
 
-You choose a format **per round** on the [Rounds & Heats](/guide/running-an-event#stage-2-rounds-heats)
-stage. Each format produces its heats and tells GridFPV how to rank pilots. A typical event
-chains a couple of rounds — for example *Open Practice*, then *Qualifying*, then a *Bracket*
-seeded from qualifying.
+GridFPV ships three round types. They are deliberately simple building blocks: each one does
+one job well, and bigger structures are assembled by chaining rounds.
 
-## Choosing a format at a glance
+## Choosing a round type at a glance
 
-| Format | Use it when you want… |
+| Round type | Use it when you want… |
 | --- | --- |
-| **Open Practice** | Casual warm-up flying with no scoring pressure. |
-| **Qualifying** | A fair ranking to seed a bracket or final. |
-| **Round Robin** | Everyone to meet everyone, points-based. |
-| **ZippyQ** | A rolling "fly when ready" queue, added to on demand. |
-| **Single / Double Elimination** | A head-to-head bracket to a winner. |
-| **Multi-Main** | Tiered A/B/C finals so the whole field gets a real final. |
+| **Practice** | Casual warm-up flying with no scoring pressure. |
+| **Time Trials** | A fair ranking — every pilot against the clock. |
+| **Head-to-Head** | Direct racing in groups, ranked by placement or points. |
 
-## The formats
+## The round types
 
-### Open Practice
+### Practice
 
 **What it is.** One open heat over the channels you choose. Pilots get on a channel and fly.
 Laps are shown live on a per-channel **practice board**, but they are **not recorded** — the
@@ -33,112 +29,98 @@ board clears when you start a fresh run.
 starts.
 
 **How to set it up.**
-1. Add a round and choose **Open Practice**.
+1. Add a round and choose **Practice**.
 2. (Optional) set a **time limit** in minutes — leave it blank for no limit, and end the run
    manually.
 3. Pick the **active channels** — the timer node seats that are live for the session.
 4. In Race Control, run the heat and use **New run · clear board** to start each fresh
    practice run.
 
-Open Practice has no win condition and no ranking — it is purely flying time.
+Practice has no win condition and no ranking — it is purely flying time.
 
-### Qualifying
+### Time Trials
 
-**What it is.** Each pilot flies **multiple heats**, and their **best result ranks** them.
-Pilots fly on **fixed, static channels** (assigned on Classes & Roster), and heats are
-channel-balanced so everyone gets fair air. The resulting ranking is exactly what a bracket
-seeds from.
+**What it is.** Every pilot races **the clock**, not each other. Each pilot flies one or more
+heats and their **best result ranks** them. Pilots fly on **fixed, static channels** (assigned
+on Classes & Roster), and heats are **channel-balanced automatically** — a large field is
+split into as many heats as it needs, capped at your timer's node count, so a 64-pilot field
+just works.
 
-**When to use it.** Whenever you need a fair seeding before a final or a bracket — the
-standard competitive opener.
+**When to use it.** Whenever you need a fair seeding before a final — the standard
+competitive opener. The finished ranking is exactly what a later round's **From ranking**
+seeding draws from.
 
 **How to set it up.**
-1. Add a round and choose the qualifying format (**Timed Qual**).
+1. Add a round and choose **Time Trials**.
 2. Set **Heats per pilot** — how many heats each pilot flies (default 3). Best result counts.
-   Set it to **0** to run the round **open-ended** — instead of a fixed number, the button
-   becomes **Generate next heat** and produces one more heat each time you ask, indefinitely,
-   until you stop. Great for "keep qualifying until we run out of time."
-3. Choose the **win condition**, which doubles as the **ranking metric** (see below). For
-   *Best Lap* and *Best N Consecutive* you also set a **Race time** — these formats are always
-   timed (you fly the window and your best result counts), so the race needs a length.
-4. Fill heats; each pilot appears across several heats on their fixed channel.
-
-::: tip
-In qualifying, the win condition **is** the ranking. Pick *Best Lap* to rank by fastest lap,
-*Best N Consecutive* to rank by best consecutive laps, or *Timed — Most Laps* to rank by laps
-flown.
-:::
+   Set it to **0** to run the round **open-ended** — the button becomes **Generate next
+   heat** and produces one more heat each time you ask, until you stop. Great for "keep
+   qualifying until we run out of time."
+3. Choose the **win condition**, which **is** the ranking metric (see below): **Best of N
+   laps** (N = 1 ranks by single fastest lap; N = 3 rewards consistency) or **Timed — Most
+   Laps**. Best-of-N is always timed, so you also set a **Race time** — the length of the
+   window each pilot flies.
+4. Generate heats; each pilot appears across heats on their fixed channel.
 
 ::: tip Finalize to rank
 A round's ranking only counts heats you've **finalized**. Until you finalize a round's heats,
 its ranking won't be settled — so finalize each heat once you're happy with it (Marshaling or
-Race Control), then the ranking and any bracket seeding are ready.
+Race Control), and the ranking — and anything seeded from it — is ready.
 :::
 
-### Round Robin
+### Head-to-Head
 
-**What it is.** Pilots are grouped and meet across multiple heats, ranked by combined points
-(or, for a timed condition, by total laps).
+**What it is.** Direct racing. The field splits into **groups** that race each other, and the
+round ranks everyone by how they finished. One grouping decision per round: the groups are
+drawn when you generate heats, and every heat in the round races those same groups.
 
-**When to use it.** A group stage where you want broad, even matchups rather than a knockout.
-
-**How to set it up.** Choose **Round Robin**, set **Heats per pilot** and **heat size**, and
-pick a win condition. Pilots fly on static channels like qualifying.
-
-### ZippyQ
-
-**What it is.** A **rolling** format. Rather than a fully precomputed schedule, you add rounds
-on demand and pilots fly when they are ready.
-
-**When to use it.** Relaxed sessions, big open fields, or any "fly when you're ready" format
-where you want to add depth as the day goes.
-
-**How to set it up.** Choose **ZippyQ** and start with however many initial rounds you want
-(default 0). Add more rounds from the Rounds & Heats stage as pilots queue up.
-
-### Single / Double Elimination
-
-**What it is.** Classic head-to-head **brackets**, seeded from a qualifying ranking.
-
-- **Single Elimination** — one loss and you are out.
-- **Double Elimination** — a pilot must lose twice; a losers' bracket gives a second chance,
-  and the top of each bracket meets in the final.
-
-**When to use it.** The competitive finale — a direct path to a winner.
+**When to use it.** Mains, finals, ProSpec-style points racing — any time pilots should race
+each other rather than the clock.
 
 **How to set it up.**
-1. Run a qualifying round first and **finalize its heats** to produce a ranking.
-2. Add the first bracket round, set its **seeding** to **From ranking**, choose the qualifying
-   round as the source, and set **Top N advance** to take the top seeds. (The **Advance to
-   bracket** shortcut on a finished round does this for you.)
-3. Set the **heat size** (default 2 for head-to-head) and a **win condition** (e.g. *First to N
-   Laps* or *Timed*) so the matches end.
-4. Channels are assigned **per heat** from your timer's pool, so each match gets clean
+1. Add a round and choose **Head-to-Head**.
+2. Set the **Group size** — pilots per heat, capped at your timer's node count.
+3. Set **Heats per group** — how many back-to-back heats each group races (default 1, a
+   single pass where everyone races once). With 2 or more, the **same groups** run again and
+   the scoring accumulates across heats — the classic "three rounds of points racing with
+   your group" club format.
+4. Pick the **win condition**: **Timed — Most Laps** or **First to N Laps** — both end a heat
+   decisively.
+5. Pick the **scoring**:
+   - **Placement** — rank by finishing position (heat winners first). With several heats per
+     group, a pilot's best single result counts.
+   - **Points** — each finishing position earns points from an **editable per-position
+     table** (a steep MultiGP-style 10 / 6 / 4 / 3 / 2 / 1 by default, one row per position,
+     following the group size). Points **sum across every heat a pilot flies** — this is what
+     makes multi-heat racing meaningful.
+6. Channels are assigned **per heat** from your timer's pool, so each group gets clean
    frequencies.
 
-::: info Each bracket level is its own round
-A bracket runs **one level per round** — Quarters, Semis, Final are separate rounds. After a
-level's heats finish, add the next round and set its **seeding** to **From heat winners**
-pointing at the previous level; the winners carry forward automatically. Repeat down to the
-final. (Double Elimination adds the losers'-bracket rounds the same way.)
+## Seeding — chaining rounds together
+
+Every scored round declares where its field comes from:
+
+- **From roster** — the round's class membership, as entered on Classes & Roster. The usual
+  choice for practice and time trials.
+- **From ranking** — a previous round's finished ranking. Pick one or more **source rounds**
+  (several are combined by each pilot's best result) and **Take top** — how many pilots from
+  that ranking race in this round. The count is bounded by the pilots actually available in
+  the source rounds, so you can't ask for a cut the ranking can't fill.
+
+That's how an event chains: Time Trials seeded from the roster, then a Head-to-Head final
+seeded **From ranking** with the top 8.
+
+::: info Tournament structures return later
+Bracket builders (single/double elimination), multi-main tiers, and round-robin structures
+are being rebuilt on top of these round types and will return in a future release. Until
+then, you can still hand-chain rounds with **From ranking** seeding — a time trial into a
+top-N final covers most club nights.
 :::
-
-### Multi-Main
-
-**What it is.** Tiered finals — **A-main, B-main, C-main**, and so on — so the whole field
-gets a meaningful final at its level, not just the top group.
-
-**When to use it.** Larger fields where you want everyone to have a real final, with the top
-seeds in the A-main.
-
-**How to set it up.** Choose **Multi-Main**, seed it **From ranking** off your qualifying
-round, and set the **main size** (pilots per tier). The top seeds fill the A-main, the next
-tier the B-main, and so on.
 
 ## Win conditions
 
-A **win condition** decides when a heat ends and how its pilots are ranked. You pick one per
-round (Open Practice is the exception — it has none).
+A **win condition** decides when a heat ends and how its pilots are ranked. Each round type
+offers the conditions that make sense for it (Practice is the exception — it has none).
 
 ### Timed — Most Laps (recommended)
 
@@ -148,25 +130,23 @@ counts if they crossed the gate just after the buzzer.
 
 This is the recommended default for most racing: everyone flies the same amount of time, "most
 laps wins" is easy to call and easy to understand, and the grace window keeps close finishes
-fair.
+fair. Offered in both Time Trials and Head-to-Head.
 
 ### First to N Laps
 
 The first pilot to complete **N laps** wins, and the heat ends when the leader gets there.
-Good for a fast, decisive bracket match. Set the **laps** target on the round.
+Good for a fast, decisive head-to-head race. Set the **laps** target on the round.
+Head-to-Head only.
 
-### Best Lap
+### Best of N Laps
 
-Ranks by the **single fastest lap**. Used in qualifying, where the heat runs to its time limit
-(or until you force it to end) and the best lap each pilot turned is what counts.
-
-### Best N Consecutive
-
-Ranks by the **fastest run of N back-to-back laps** (N defaults to 3). Also a qualifying
-metric — it rewards consistency over a single hot lap.
+Ranks by each pilot's **fastest run of N back-to-back laps**. **N = 1 ranks by the single
+fastest lap** (raw pace); N = 3 (the default) rewards consistency over a single hot lap.
+Always timed — you fly the race-time window and your best run counts. Time Trials only,
+where it doubles as the qualifying metric.
 
 ::: tip Which win condition?
 For head-to-head racing, **Timed — Most Laps** or **First to N Laps**. For seeding a field,
-qualify on **Best Lap** (raw pace), **Best N Consecutive** (consistency), or **Timed — Most
-Laps** (endurance) depending on what you want to reward.
+qualify on **Best of 1** (raw pace), **Best of 3** (consistency), or **Timed — Most Laps**
+(endurance) depending on what you want to reward.
 :::

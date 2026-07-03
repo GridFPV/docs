@@ -32,7 +32,9 @@ you are at the field with real gear.
 ## RotorHazard
 
 [RotorHazard](https://github.com/RotorHazard/RotorHazard) is a popular open-source RF timing
-system. GridFPV connects to it over its web server.
+system. GridFPV connects to it over its web server and talks to the **GridFPV RotorHazard
+plugin** running inside RH (RotorHazard **4.3.0 or newer**). If the plugin isn't installed
+yet, GridFPV detects that and walks you through a one-step install when you connect.
 
 ### Connect it
 
@@ -65,12 +67,12 @@ frequencies for flexible timers).
 
 Per-pilot channels come from your event's **primary timer**:
 
-- **Qualifying / time-trial rounds** use **static** channels — each pilot keeps a fixed
+- **Time Trials** use **static** channels — each pilot keeps a fixed
   channel you assign on
   [Classes & Roster](/guide/running-an-event#stage-1-classes-roster). Use **Auto-assign
   channels** to spread the pool across the field, then override anyone as needed.
-- **Brackets** assign channels **per heat** from the timer's pool, so each match gets clean,
-  conflict-free frequencies.
+- **Head-to-Head rounds** assign channels **per heat** from the timer's pool, so each
+  group gets clean, conflict-free frequencies.
 
 ## The heat lifecycle
 

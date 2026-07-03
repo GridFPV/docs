@@ -21,7 +21,7 @@ features:
   - title: Pluggable timers
     details: Start with the built-in Mock timer to learn the flow, then connect RotorHazard for real hardware timing. More sources over time.
   - title: Formats that fit your event
-    details: Qualifying, open practice, single/double elimination brackets, and more — with flexible win conditions like Best Lap, First to N, or Most Laps.
+    details: Practice, Time Trials, and Head-to-Head rounds — chained by seeding, with flexible win conditions like Best of N Laps, First to N, or Most Laps.
 ---
 
 ## What is GridFPV?
@@ -39,6 +39,6 @@ GridFPV on your own machine and your event data lives there with you.
 
 - **New here?** Start with [Getting Started](/guide/getting-started) to download and run GridFPV.
 - **Running a race day?** See [Running an Event](/guide/running-an-event) for the event workspace, stage by stage.
-- **Choosing a structure?** [Round Formats](/guide/formats) covers qualifying, brackets, and win conditions.
+- **Choosing a structure?** [Round Formats](/guide/formats) covers the round types, seeding, and win conditions.
 - **Plugging in hardware?** [Connecting a Timer](/guide/timers) walks through the Mock and RotorHazard timers.
 - **Quick questions?** Check the [FAQ](/guide/faq).

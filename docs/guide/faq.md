@@ -51,12 +51,12 @@ time**, and **most laps wins**. It is easy to call, easy for pilots to understan
 just after the buzzer. You can still use **First to N Laps** for a fixed-distance race — see
 [Win conditions](/guide/formats#win-conditions).
 
-## Do laps in Open Practice get saved?
+## Do laps in Practice get saved?
 
-No. Open Practice shows laps live on the per-channel practice board, but they are **not
+No. Practice shows laps live on the per-channel practice board, but they are **not
 recorded** — it is free flying time with no scoring. Starting a new run clears the board. Use
-**Qualifying** when you want results that count. See
-[Open Practice](/guide/formats#open-practice).
+**Time Trials** when you want results that count. See
+[Practice](/guide/formats#practice).
 
 ## How do I run a quick test without any hardware?
 
@@ -100,6 +100,9 @@ your library and open whichever one you are running; create and switch between t
 GridFPV is actively growing. A few areas are deliberately lighter today and will deepen over
 time:
 
+- **Tournament structures** — bracket builders (single/double elimination), multi-main
+  tiers, and round robin — are being rebuilt on top of the three round types and return in
+  a future release. Until then, chain rounds by hand with **From ranking** seeding.
 - **Marshaling** currently focuses on lap-level corrections (insert / void / adjust / penalty);
   signal-based lap recovery on supported hardware will expand.
 - **Live callouts and overlays** (announcer audio, broadcast graphics) are on the roadmap.
