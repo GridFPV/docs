@@ -95,6 +95,26 @@ One event runs one track at a time through Race Control. You can keep **multiple
 your library and open whichever one you are running; create and switch between them from the
 **Events** page on the home hub.
 
+## Why did a lap disappear on its own?
+
+The round's **minimum lap time** caught it: a crossing that would close a lap shorter than
+the floor (default 5s) is auto-removed as a double-detection — a gate reflection registering
+twice. It's never silent: the crossing shows on the marshaling lap list as *"under min lap,
+auto-removed"* with a **Restore** button if it was real. See
+[Marshaling](/guide/marshaling#the-removal-record).
+
+## What's the difference between Remove and Throw out?
+
+**Remove** says the crossing **never really happened** (noise, a reflection) — the pass is
+deleted and the laps around it merge. **Throw out** says the lap **happened but doesn't
+count** (a course cut, a penalty) — it stays on the clock, excluded from scoring. Bad
+detection → Remove; rule violation → Throw out. See [Marshaling](/guide/marshaling#the-lap-list).
+
+## What version am I running?
+
+Bottom-right corner of the console — e.g. *GridFPV v0.4.0-alpha.1*. Quote it in any bug
+report.
+
 ## What's still coming?
 
 GridFPV is actively growing. A few areas are deliberately lighter today and will deepen over
@@ -103,8 +123,7 @@ time:
 - **Tournament structures** — bracket builders (single/double elimination), multi-main
   tiers, and round robin — are being rebuilt on top of the three round types and return in
   a future release. Until then, chain rounds by hand with **From ranking** seeding.
-- **Marshaling** currently focuses on lap-level corrections (insert / void / adjust / penalty);
-  signal-based lap recovery on supported hardware will expand.
-- **Live callouts and overlays** (announcer audio, broadcast graphics) are on the roadmap.
+- **Streaming & broadcast** (overlays, announcer feeds) and the optional **cloud** tier are
+  on the roadmap.
 
 We would rather ship these well than overpromise — what's documented here is what works today.

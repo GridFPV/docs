@@ -49,6 +49,13 @@ yet, GridFPV detects that and walks you through a one-step install when you conn
 The timer's status pill shows where the connection stands — **Ready**, **Connecting**,
 **Connected**, **Disconnected**, or **Error**.
 
+::: tip Double-detections are handled in GridFPV
+A gate reflection can register two crossings milliseconds apart. GridFPV enforces its own
+per-round **minimum lap time** (default 5s on new rounds): a crossing that would close a
+shorter lap is auto-removed, visibly, with a marshal **Restore** override — regardless of
+the timer's own min-lap settings. See [Marshaling](/guide/marshaling#the-removal-record).
+:::
+
 ### Channels vs nodes {#channels-vs-nodes}
 
 These are two different things, and the difference matters when you set up a timer:
@@ -93,32 +100,32 @@ predictable:
 From Race Control you drive the heat with a few actions:
 
 - **Stage** — move a Scheduled heat to Staged and start the staging countdown.
-- **Start** — arm a Staged heat and run the start procedure.
-- **Finalize** — lock an Unofficial heat as Final.
+- **Start** — arm a Staged heat and run the start procedure (the countdown runs itself).
+- **Stop** — end a Running race now; pilots land and the result stands as flown.
+- **Finalize** — lock an Unofficial heat as Final; **Advance** moves on to the next heat.
 - **Abort** / **Restart** — reset the heat all the way back to **Scheduled** so you can
-  re-stage it. (These ask for confirmation, since they discard the attempt.)
-- **Skip countdown** / **Force end** — overrides to push past the automatic timing when you
-  need to.
+  re-stage it; **Discard** throws the heat out entirely. (The destructive ones ask for
+  confirmation.)
 
 ### The start procedure
 
 When you **Start** a staged heat, it arms and runs a start procedure before going live:
 
-1. **Announce** — the console signals the start is coming.
-2. **A short randomized hold** — a brief delay (a couple of seconds, randomized) so pilots
-   can't anticipate the exact go.
-3. **The start tone** — GridFPV plays the audible go-tone itself. There is a **Tone on/off**
-   toggle in Race Control if you need to mute it.
+1. **A short randomized hold** — a brief delay (a couple of seconds, randomized per the
+   round's start procedure) so pilots can't anticipate the exact go.
+2. **The start tone** — GridFPV plays the audible go-tone itself.
 
-The instant the hold elapses, the heat moves to **Running** on its own — listen for the tone.
+The instant the hold elapses, the heat moves to **Running** on its own — listen for the
+tone. Procedure audio (start tone, end-of-race countdown pips, race-end buzzer) is
+**always on** and plays whatever page you're on; the spoken **lap callouts** are the
+informational layer, muted by the **Callouts** toggle in Race Control.
 
 ### How a heat ends
 
 A Running heat **ends on its own** when its [win condition](/guide/formats#win-conditions) is
 met, plus a **grace window** (default 30s) that lets late crossings still count. The heat then
 moves to **Unofficial**, where you can review and correct it in
-[Marshaling](/guide/running-an-event#stage-4-marshaling) before you **Finalize** it. If the
-clock can't be trusted, **Force end** steps it to Unofficial immediately.
+[Marshaling](/guide/marshaling) before you **Finalize** it. To end it early, press **Stop**.
 
 ### Choosing the current heat
 

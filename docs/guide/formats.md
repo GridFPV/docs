@@ -117,6 +117,27 @@ then, you can still hand-chain rounds with **From ranking** seeding — a time t
 top-N final covers most club nights.
 :::
 
+## Round timing & safeguards
+
+Every scored round carries a few timing knobs (set on the round form; the defaults are
+sensible):
+
+- **Staging time** — the "pilots to the line" countdown length (informational; default 5:00).
+- **Start delay** — the randomized hold range between Start and the go-tone (default 2–5s).
+- **Grace window** — how long after the win condition late crossings still count
+  (default 30s).
+- **Min lap time** — crossings that would close a lap shorter than this are auto-removed as
+  double-detections (default 5s on new rounds; 0 = off; every auto-removal is visible in
+  [Marshaling](/guide/marshaling#the-removal-record) with a Restore override).
+- **Protest window** — 0 means results wait for your manual **Finalize**; a value
+  auto-finalizes the result that many seconds after race end, leaving a protest window.
+
+::: warning Raced rounds freeze their scoring rules
+Once a round has raced heats, its scoring-defining settings (format, classes, win condition,
+seeding, min lap time) lock — editing them would silently re-score finished results. Label,
+staging/start timing, grace, protest window, and heats-per-pilot stay editable.
+:::
+
 ## Win conditions
 
 A **win condition** decides when a heat ends and how its pilots are ranked. Each round type

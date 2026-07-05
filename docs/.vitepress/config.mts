@@ -34,6 +34,7 @@ export default defineConfig({
         items: [
           { text: 'Getting Started', link: '/guide/getting-started' },
           { text: 'Running an Event', link: '/guide/running-an-event' },
+          { text: 'Marshaling', link: '/guide/marshaling' },
           { text: 'Round Formats', link: '/guide/formats' },
           { text: 'Connecting a Timer', link: '/guide/timers' },
           { text: 'FAQ', link: '/guide/faq' }
@@ -56,8 +57,18 @@ export default defineConfig({
                 { text: 'Classes & Roster', link: '/guide/running-an-event#stage-1-classes-roster' },
                 { text: 'Rounds & Heats', link: '/guide/running-an-event#stage-2-rounds-heats' },
                 { text: 'Race Control', link: '/guide/running-an-event#stage-3-race-control' },
-                { text: 'Marshaling', link: '/guide/running-an-event#stage-4-marshaling' },
                 { text: 'Results', link: '/guide/running-an-event#stage-5-results' }
+              ]
+            },
+            {
+              text: 'Marshaling',
+              link: '/guide/marshaling',
+              collapsed: false,
+              items: [
+                { text: 'The lap list', link: '/guide/marshaling#the-lap-list' },
+                { text: 'The removal record', link: '/guide/marshaling#the-removal-record' },
+                { text: 'Tune detection', link: '/guide/marshaling#tune-detection' },
+                { text: 'Rulings & protests', link: '/guide/marshaling#heat-rulings-protests' }
               ]
             },
             {
@@ -67,6 +78,7 @@ export default defineConfig({
               items: [
                 { text: 'The round types', link: '/guide/formats#the-round-types' },
                 { text: 'Seeding', link: '/guide/formats#seeding-chaining-rounds-together' },
+                { text: 'Timing & safeguards', link: '/guide/formats#round-timing-safeguards' },
                 { text: 'Win conditions', link: '/guide/formats#win-conditions' }
               ]
             },

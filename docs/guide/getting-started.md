@@ -21,11 +21,12 @@ no separate database. You download a single executable, run it, and it opens its
 
 ### 1. Download
 
-Grab the build for your operating system from the GridFPV releases page:
+Grab the build for your operating system from the
+[GridFPV releases page](https://github.com/GridFPV/gridfpv/releases):
 
-- **Windows** — `gridfpv-desktop.exe`
-- **Linux** — `gridfpv-desktop`
-- **macOS** — `gridfpv-desktop`
+- **Windows** — `gridfpv-desktop-windows-x86_64.exe`
+- **Linux** — `gridfpv-desktop-linux-x86_64`
+- **macOS** (Apple Silicon) — `gridfpv-desktop-macos-arm64`
 
 ::: tip
 Put the downloaded file somewhere it can stay, like a `GridFPV` folder in your Documents or
@@ -35,16 +36,24 @@ executable** (see below), so keeping the app in a stable location keeps your dat
 
 ### 2. Run it
 
-- **Windows** — double-click `gridfpv-desktop.exe`. If Windows SmartScreen warns about an
+- **Windows** — double-click the `.exe`. If Windows SmartScreen warns about an
   unrecognized app, choose **More info → Run anyway**.
-- **macOS / Linux** — you may first need to mark the file as executable:
+- **Linux** — mark it executable, then run it:
 
   ```sh
-  chmod +x ./gridfpv-desktop
-  ./gridfpv-desktop
+  chmod +x ./gridfpv-desktop-linux-x86_64
+  ./gridfpv-desktop-linux-x86_64
   ```
 
-A GridFPV window opens. That is it — you are running.
+- **macOS** — mark it executable, and on first launch **right-click → Open** (Gatekeeper
+  blocks a plain double-click on unsigned apps):
+
+  ```sh
+  chmod +x ./gridfpv-desktop-macos-arm64
+  ```
+
+A GridFPV window opens. That is it — you are running. The version you're on shows in the
+bottom-right corner of the console (quote it in any bug report).
 
 ### 3. Where your data lives
 

@@ -130,10 +130,20 @@ together.
    - **Seeding** — start **From roster**, or **From ranking** to seed from earlier
      rounds (pick one or more source rounds and **Take top** — how many pilots from that
      ranking race here; the count is bounded by the source rounds' field).
-   - **Start & timing** — staging time, the **start procedure** delay range, and the
-     **grace window** (default 30s). The defaults are sensible; leave them unless you have a
-     reason to change them.
+   - **Start & timing** — staging time, the **start procedure** delay range, the
+     **grace window** (default 30s), the **min lap time** (default 5s — crossings that would
+     close a shorter lap are auto-removed as double-detections, marshal-restorable; 0 = off),
+     and the **protest window** (0 = manual finalize; otherwise the result auto-finalizes
+     that many seconds after race end). The defaults are sensible; leave them unless you
+     have a reason to change them.
 3. Save the round. You can **Edit** or **Remove** it later.
+
+::: warning Raced rounds freeze their scoring rules
+Once a round has raced heats, its scoring-defining settings (format, classes, win condition,
+seeding, min lap time) **lock** — editing them would silently re-score finished results. The
+label, staging/start timing, grace, protest window, and the heats-per-pilot count stay
+editable.
+:::
 
 ### Fill heats
 
@@ -169,73 +179,60 @@ Finalize or abort the current heat first.
 1. **Stage** the heat. This begins the staging countdown ("pilots to the line"). The
    countdown is informational — nothing auto-advances, so take your time and **Start when
    ready**.
-2. **Start** the heat. It arms and runs the start procedure: an announcement, a short
-   **randomized hold** (so pilots can't anticipate the exact go), then the **start tone**.
-   The console owns the tone — there is a **Tone on/off** toggle if you need to mute it.
-3. The moment the hold elapses, the heat goes **Running** on its own. Watch for *"Arming…
-   stand by — the race starts on its own, listen for the tone."*
+2. **Start** the heat. It arms and runs the start procedure: a short **randomized hold**
+   (so pilots can't anticipate the exact go), then the **start tone**. The countdown runs
+   itself — there is nothing to press between Start and the tone.
+3. The moment the hold elapses, the heat goes **Running** on its own — listen for the tone.
+
+### Race audio
+
+The console is the race's voice, and it follows you to **every page** — you can stage a
+heat, walk over to Marshaling or Rounds, and still hear everything:
+
+- **Procedure tones** are always on: the start tone, the end-of-race countdown pips
+  (5…1s), and the race-end buzzer.
+- **Lap callouts** — a crossing pip plus a spoken *"‹callsign›, lap N, ‹time›"* for every
+  recorded lap — are the informational layer. The **Callouts** toggle in Race Control mutes
+  them (the procedure tones stay).
 
 ### Watch the race
 
-While Running, the **heat clock** counts up and the **live standing** updates per pilot
-(laps, last lap, best lap). In Practice you get a **practice board** per channel instead,
-with a **New run · clear board** button to start a fresh run.
+While Running, the **live standing** updates per pilot (laps, last lap, best lap). A
+**timed** heat shows a big **countdown** from the race time — past zero it runs negative
+through the grace window (yellow, then red) — with a smaller count-up elapsed clock beside
+it. Other heats show the classic count-up. In Practice you get a **practice board** per
+channel instead, with a **New run · clear board** button to start a fresh run.
 
 The race **ends on its own** when the win condition is met, plus the grace window (default
-30s) so late crossings still count. The heat then moves to **Unofficial**. If you ever need
-to end it now, use the **Force end** override.
+30s) so late crossings still count. The heat then moves to **Unofficial**. If you need to
+end it early, press **Stop**.
 
 ### Finish to Unofficial, then Final
 
 - When the heat reaches **Unofficial**, the result is provisional — this is your window to
-  fix anything (see [Marshaling](#stage-4-marshaling)).
-- When the result looks right, **Finalize** to lock it as **Final**.
+  fix anything (see [Marshaling](/guide/marshaling)).
+- When the result looks right, **Finalize** to lock it as **Final**. **Advance** moves you
+  on to the next heat.
 
-::: tip Overrides when you need them
-**Abort** or **Restart** reset a heat all the way back to Scheduled (you re-stage it).
-**Skip countdown** and **Force end** push past the automatic timing. These ask for
-confirmation because they throw away the current attempt.
+::: tip Off-ramps when you need them
+**Stop** ends a Running race now (pilots land; the result stands as flown). **Abort** or
+**Restart** reset a heat all the way back to Scheduled (you re-stage it), and **Discard**
+throws it out entirely. The destructive ones ask for confirmation.
 :::
 
 ## Stage 4 — Marshaling {#stage-4-marshaling}
 
-Marshaling is where you **correct a heat's result** before (or after) locking it.
+Marshaling is where you **correct a heat** — fix laps against the recorded signal, apply
+penalties, handle protests, and set the official result. It has grown into its own guide:
+**[Marshaling](/guide/marshaling)** covers every tool in detail.
 
-### Pick what to marshal
-
-- **Marshal heat** — a dropdown to choose *which heat* you're reviewing. It defaults to and
-  follows Race Control's current heat, but you can pin **any** heat to review it. Switching the
-  marshaled heat here **never** changes the heat Race Control is running — the two are
-  independent, so you can marshal a finished heat while the next one is staged.
-- **Marshal pilot** — a dropdown to focus on **one pilot at a time**, so the signal graph and
-  lap list stay uncluttered.
-
-### Correct the laps
-
-- **Insert a missed lap** — pick the pilot and the time it should have crossed (or click the
-  signal graph at that moment).
-- **Void / adjust a detection** — throw out a bad crossing, or correct a lap's time.
-- **Throw out a lap** — drop a valid lap from the scored count without deleting it.
-- **Apply a penalty** — add time, deduct points, or disqualify a pilot.
-- **File / resolve a protest** — record a protest against a pilot and rule on it.
-
-### Set the result
-
-The **Heat result** controls act on the marshaled heat:
-
-- **Finalize → Official** when the heat is Unofficial — locks the result.
-- **Revert → Unofficial** when it's Official — re-opens a locked result for correction.
-- **Void heat** — throws out the whole heat so it does not count (asks for confirmation).
-
-Every correction **re-folds the result live** — standings and any advancement update
-immediately, because results are derived from the lap log. The lifecycle badge and these
-controls always reflect the **marshaled** heat, not Race Control's current one.
-
-::: tip
-Marshaling today focuses on lap-level corrections. Deeper signal-based recovery (re-deriving
-laps from RotorHazard's captured signal) is available on supported hardware and will grow over
-time.
-:::
+The one-paragraph version: pin any heat (without touching the one Race Control is running),
+focus one pilot at a time, and correct their laps right on the lap list — **Remove** a false
+crossing, **Save** an edited lap time, **Split** a double-length lap, **Throw out** a lap
+that shouldn't count, **Add** a missed one, or re-derive the whole set from the RSSI trace
+with **Tune detection**. Below the divider, whole-heat rulings: penalties, protests,
+**Finalize / Revert**, and **Void heat**. Every change is an audited ruling and results
+re-fold live.
 
 ## Stage 5 — Results {#stage-5-results}
 

@@ -22,6 +22,10 @@ features:
     details: Start with the built-in Mock timer to learn the flow, then connect RotorHazard for real hardware timing. More sources over time.
   - title: Formats that fit your event
     details: Practice, Time Trials, and Head-to-Head rounds — chained by seeding, with flexible win conditions like Best of N Laps, First to N, or Most Laps.
+  - title: Defensible results
+    details: Marshal against the recorded radio signal — fix laps, tune detection, apply penalties, rule on protests. Every change is an audited ruling; results re-derive live.
+  - title: The race is audible
+    details: Start tone, end-of-race countdown, and spoken lap callouts follow you to every page — the console is the race's voice, not just its screen.
 ---
 
 ## What is GridFPV?
