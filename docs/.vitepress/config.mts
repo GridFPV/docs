@@ -37,6 +37,7 @@ export default defineConfig({
           { text: 'Marshaling', link: '/guide/marshaling' },
           { text: 'Round Formats', link: '/guide/formats' },
           { text: 'Connecting a Timer', link: '/guide/timers' },
+          { text: 'Tuning a Gate', link: '/guide/tuning' },
           { text: 'FAQ', link: '/guide/faq' }
         ]
       }
@@ -54,6 +55,10 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: 'The setup wizard', link: '/guide/running-an-event#the-setup-wizard' },
+                {
+                  text: 'Timers & channel layouts',
+                  link: '/guide/running-an-event#timers-and-layouts'
+                },
                 { text: 'Classes & Roster', link: '/guide/running-an-event#stage-1-classes-roster' },
                 { text: 'Rounds & Heats', link: '/guide/running-an-event#stage-2-rounds-heats' },
                 { text: 'Race Control', link: '/guide/running-an-event#stage-3-race-control' },
@@ -89,8 +94,27 @@ export default defineConfig({
               items: [
                 { text: 'The Mock timer', link: '/guide/timers#the-built-in-mock-timer' },
                 { text: 'RotorHazard', link: '/guide/timers#rotorhazard' },
+                {
+                  text: 'Install the plugin',
+                  link: '/guide/timers#install-the-gridfpv-plugin'
+                },
+                { text: 'Nodes and channels', link: '/guide/timers#nodes-and-channels' },
                 { text: 'Channels vs nodes', link: '/guide/timers#channels-vs-nodes' },
                 { text: 'The heat lifecycle', link: '/guide/timers#the-heat-lifecycle' }
+              ]
+            },
+            {
+              text: 'Tuning a Gate',
+              link: '/guide/tuning',
+              collapsed: true,
+              items: [
+                { text: 'Open the Tune page', link: '/guide/tuning#open-the-tune-page' },
+                {
+                  text: 'Enter & exit levels',
+                  link: '/guide/tuning#set-the-enter-and-exit-levels'
+                },
+                { text: 'Capture from a pass', link: '/guide/tuning#capture-a-level-from-a-pass' },
+                { text: 'When tuning is refused', link: '/guide/tuning#when-tuning-is-refused' }
               ]
             },
             { text: 'FAQ', link: '/guide/faq' }

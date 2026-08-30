@@ -22,8 +22,10 @@ one job well, and bigger structures are assembled by chaining rounds.
 ### Practice
 
 **What it is.** One open heat over the channels you choose. Pilots get on a channel and fly.
-Laps are shown live on a per-channel **practice board**, but they are **not recorded** — the
-board clears when you start a fresh run.
+Laps are shown live on a per-channel **practice board** — and, like every other format, they
+are **recorded**: the run's laps sit in the lap list and the audit trail, and you can marshal
+them afterwards. What practice never does is **score**. It places nobody, and feeds no ranking
+or standings.
 
 **When to use it.** Warm-ups, open track time, and shaking out your setup before competition
 starts.
@@ -33,10 +35,21 @@ starts.
 2. (Optional) set a **time limit** in minutes — leave it blank for no limit, and end the run
    manually.
 3. Pick the **active channels** — the timer node seats that are live for the session.
-4. In Race Control, run the heat and use **New run · clear board** to start each fresh
-   practice run.
+4. In Race Control, run the heat. When it ends you get **Run complete** and one action —
+   **Run again** — which re-stages the same heat for the next run.
 
-Practice has no win condition and no ranking — it is purely flying time.
+A practice round produces **one heat**, re-run in place. Each run's laps stay put — on the
+board, in the lap list and in Marshaling — until you press **Run again**, so there's always a
+moment to look at what just happened.
+
+Practice has no win condition, no ranking, and no result to make official: Race Control offers
+it no **Finalize**, **Advance** or **Revert** at all.
+
+::: tip Practice is tunable while it runs
+Because nothing is being scored, GridFPV lets you adjust gate thresholds *during* an open
+practice run — which is exactly when pilots are in the air to test against. See
+[Tuning a Gate](/guide/tuning#when-tuning-is-refused).
+:::
 
 ### Time Trials
 
@@ -80,10 +93,11 @@ each other rather than the clock.
 **How to set it up.**
 1. Add a round and choose **Head-to-Head**.
 2. Set the **Group size** — pilots per heat, capped at your timer's node count.
-3. Set **Heats per group** — how many back-to-back heats each group races (default 1, a
+3. Set **Heats per group** — how many heats each group races over the round (default 1, a
    single pass where everyone races once). With 2 or more, the **same groups** run again and
    the scoring accumulates across heats — the classic "three rounds of points racing with
-   your group" club format.
+   your group" club format. Groups **take turns**: a group's heats are spread through the
+   round, not run back to back.
 4. Pick the **win condition**: **Timed — Most Laps** or **First to N Laps** — both end a heat
    decisively.
 5. Pick the **scoring**:
@@ -116,6 +130,21 @@ are being rebuilt on top of these round types and will return in a future releas
 then, you can still hand-chain rounds with **From ranking** seeding — a time trial into a
 top-N final covers most club nights.
 :::
+
+## Channels for a round
+
+By default a round's channels are picked automatically from the primary timer's allowed set.
+For explicit control, define [channel layouts](/guide/running-an-event#channel-layouts) on the
+event — a layout is a complete *node → channel* tuning — and tick the ones this round may fly on
+the round form:
+
+- **One layout** — every heat in the round flies it. This is the bracket case.
+- **Several** — heats alternate through them in order, so back-to-back heats don't share
+  channels. This is the qualifier case, where you want pilots to keep their own channel.
+- **None** — the automatic pick, as before.
+
+You can still override any individual Scheduled heat's layout from its own **Layout** dropdown
+on Rounds & Heats.
 
 ## Round timing & safeguards
 

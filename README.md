@@ -29,13 +29,12 @@ docs/
 └── guide/
     ├── getting-started.md  # how to download & run GridFPV (native + hosted)
     ├── running-an-event.md # the event workspace, stage by stage
+    ├── marshaling.md       # correcting a heat: laps, rulings, protests
     ├── formats.md          # round formats & win conditions
-    ├── timers.md           # connecting Mock / RotorHazard + heat lifecycle
+    ├── timers.md           # connecting Mock / RotorHazard (+ plugin) + heat lifecycle
+    ├── tuning.md           # per-node gate tuning: enter/exit levels, Capture, channels
     └── faq.md              # common questions
 ```
-
-Getting Started is complete content; the other guide pages are solid outlines with `TODO`
-markers that we fill in over time.
 
 ## Search
 

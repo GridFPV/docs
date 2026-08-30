@@ -32,8 +32,41 @@ See [Getting Started](/guide/getting-started) for both.
 ## Which timers are supported?
 
 Today GridFPV ships with the built-in **Mock** timer (a simulator for learning and demos) and
-support for **RotorHazard** over its server URL. More timing sources are planned. See
+support for **RotorHazard 4.3.0 or newer** over its server URL, with the **GridFPV RotorHazard
+plugin** installed. More timing sources are planned. See
 [Connecting a Timer](/guide/timers).
+
+## Do I need the GridFPV plugin for RotorHazard?
+
+**Yes — stock RotorHazard is not enough.** GridFPV will connect to a plugin-less RotorHazard so
+you can diagnose it, but it refuses to select that timer for an event and refuses to arm a heat
+on it.
+
+The plugin is what lets GridFPV own the race: it switches off RotorHazard's own race format and
+min-lap filter so every crossing reaches GridFPV and RH makes no scoring decisions of its own.
+
+Installing it is a few clicks from inside GridFPV — GridFPV serves the bundle, tells you where
+RotorHazard's `plugins/` folder is, and can restart RotorHazard for you to finish the job. See
+[Install the GridFPV plugin](/guide/timers#install-the-gridfpv-plugin).
+
+## Why can't I tick my RotorHazard timer for an event?
+
+One of three things, and GridFPV says which on the timer's row:
+
+- **It has never been connected**, so GridFPV can't tell whether the plugin is there. Connect
+  it first (you don't need an event to do that).
+- **The plugin is missing.** Install it and restart RotorHazard.
+- **The plugin doesn't match this GridFPV.** Update it and restart RotorHazard.
+
+See [Connecting a Timer](/guide/timers#connect-and-test).
+
+## How do I check a timer works before an event?
+
+Open **Timers** on the home hub and press **Connect** on the timer's row. You don't need an
+event, a roster, or a heat. GridFPV dials the URL and tells you in plain language whether it is
+**Reachable**, or what to check if it isn't — and once it's up, a badge shows whether the
+GridFPV plugin is present. **Disconnect** lets the connection go again. See
+[Connecting a Timer](/guide/timers#connect-and-test).
 
 ## What's the difference between channels and nodes?
 
@@ -53,10 +86,21 @@ just after the buzzer. You can still use **First to N Laps** for a fixed-distanc
 
 ## Do laps in Practice get saved?
 
-No. Practice shows laps live on the per-channel practice board, but they are **not
-recorded** — it is free flying time with no scoring. Starting a new run clears the board. Use
-**Time Trials** when you want results that count. See
-[Practice](/guide/formats#practice).
+**Yes — they're recorded like any other format.** Practice laps land in the lap list and the
+audit trail, and you can marshal them afterwards. What Practice never does is **score**: it
+places nobody and feeds no ranking or standings, so it has no result to finalize. Use **Time
+Trials** when you want results that count. See [Practice](/guide/formats#practice).
+
+## My gate isn't recording laps. Where do I start?
+
+Open the timer's **Tune** page and watch the live signal while someone flies a pass. The shaded
+**crossing band** is the answer: if it doesn't open and close around the pass, the gate's
+enter/exit levels don't bracket what a real pass looks like on your track. You can set them by
+hand, or press **Capture** and fly a pass to let the timer measure one. See
+[Tuning a Gate](/guide/tuning).
+
+Mid-race, when tuning is refused, Race Control's read-only **Gate signal** strip shows you the
+same trace so you can at least tell which fault you're looking at.
 
 ## How do I run a quick test without any hardware?
 

@@ -120,12 +120,20 @@ durable registries you build up over time, and each event just picks from them.
    you can learn the whole flow without any hardware. (See
    [Connecting a Timer](/guide/timers).)
 3. Open **Events**, create a new event, and open it. You land in the **event workspace** — a
-   left-to-right sequence of stage pages (Classes & Roster → Rounds & Heats → Race Control →
-   Marshaling → Results) that walk you through setting up and running the day. A guided setup
-   wizard can do the common path for you.
+   sequence of stage pages (Classes & Roster → Rounds & Heats → Race Control → Marshaling →
+   Results, plus Timers and Audit) that walk you through setting up and running the day. A
+   guided setup wizard can do the common path for you.
 4. Schedule a heat, **Stage** it, **Start** it, and watch the Mock timer drive a live race
    through to a result.
 
+::: tip Bringing real hardware?
+GridFPV races RotorHazard through the **GridFPV RotorHazard plugin**, and it is
+[**required**](/guide/timers#rotorhazard) — stock RotorHazard won't run a heat. You can add,
+connect and test a RotorHazard timer from the **Timers** page without creating an event, and
+GridFPV installs the plugin for you from there. Do that before race day, not at the field.
+:::
+
 When you are ready for the real thing, head to [Running an Event](/guide/running-an-event)
-for the full walkthrough, [Round Formats](/guide/formats) to choose a structure, and
-[Connecting a Timer](/guide/timers) to wire up RotorHazard hardware.
+for the full walkthrough, [Round Formats](/guide/formats) to choose a structure,
+[Connecting a Timer](/guide/timers) to wire up RotorHazard hardware, and
+[Tuning a Gate](/guide/tuning) to get its detection right.

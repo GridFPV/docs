@@ -19,7 +19,7 @@ features:
   - title: Built for the race director
     details: A field-readable console — large text, dark by default — for staging heats, arming starts, marshaling, and finalizing results on a laptop in the sun.
   - title: Pluggable timers
-    details: Start with the built-in Mock timer to learn the flow, then connect RotorHazard for real hardware timing. More sources over time.
+    details: Start with the built-in Mock timer to learn the flow, then connect RotorHazard for real hardware timing — plugin install, gate tuning and connection testing all from inside GridFPV.
   - title: Formats that fit your event
     details: Practice, Time Trials, and Head-to-Head rounds — chained by seeding, with flexible win conditions like Best of N Laps, First to N, or Most Laps.
   - title: Defensible results
@@ -45,4 +45,5 @@ GridFPV on your own machine and your event data lives there with you.
 - **Running a race day?** See [Running an Event](/guide/running-an-event) for the event workspace, stage by stage.
 - **Choosing a structure?** [Round Formats](/guide/formats) covers the round types, seeding, and win conditions.
 - **Plugging in hardware?** [Connecting a Timer](/guide/timers) walks through the Mock and RotorHazard timers.
+- **Gate missing laps?** [Tuning a Gate](/guide/tuning) covers thresholds, Capture, and per-node channels.
 - **Quick questions?** Check the [FAQ](/guide/faq).

@@ -76,6 +76,12 @@ the trace — the fix for a mis-calibrated timer:
 
 Tuning is preview-only until you commit, and never writes calibration back to the timer.
 
+::: tip Fixing the heat vs. fixing the gate
+**Tune detection** repairs *this recorded heat*. To change what the gate itself detects from
+now on, set its enter/exit levels on the timer's Tune page — see
+[Tuning a Gate](/guide/tuning).
+:::
+
 ## Heat rulings & protests
 
 Everything below the divider applies to the **whole heat**, regardless of which pilot is
