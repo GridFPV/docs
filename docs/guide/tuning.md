@@ -1,137 +1,170 @@
 # Tuning a Gate
 
-A gate only records a lap when the drone's signal rises past an **enter** level and falls back
-past an **exit** level. If those two numbers don't bracket what a real pass looks like on your
-track, the gate misses laps — or invents them. The **Tune** page is where you set them, per
-node, while a quad is actually flying through.
+A gate only records a lap when the drone's signal gets **stronger than one level** and then
+**drops back below another**. Those two numbers are called **enter** and **exit**.
 
-::: tip Two different "tune" tools
-This page tunes the **hardware**, ahead of time: it writes enter/exit levels to the timer so
-future passes are detected correctly.
+If those numbers don't match what a real pass looks like on your track, the gate either misses
+laps or invents them. The **Tune** page is where you set them — one node at a time, while
+somebody actually flies through the gate.
 
-[Marshaling's **Tune detection**](/guide/marshaling#tune-detection) is the after-the-fact
-repair: it re-derives one pilot's laps from the signal a finished heat already recorded, and
-never writes anything back to the timer. Use Tune when the gate is wrong; use Tune detection
-when a *recorded heat* is wrong.
+::: tip There are two different "tune" tools. This is the hardware one.
+**This page tunes the gate**, ahead of time. It writes the enter and exit levels to the timer so
+future passes are detected properly.
+
+[Marshaling's **Tune detection**](/guide/marshaling#tune-detection) is the after-the-fact repair.
+It works out one pilot's laps again from a race that already happened, and never changes the
+timer.
+
+**Gate wrong → use this page. Recorded race wrong → use Tune detection.**
 :::
 
-## Open the Tune page
+## Open the Tune page {#open-the-tune-page}
 
-**Tune** sits on the timer's row in two places, and which one you use decides the scope:
+**Tune** appears on a timer's row in two places, and which one you use decides what you're
+editing:
 
-- **Timers on the home hub → Tune** — the timer's own baseline. This works before any event
-  exists, which is the usual case: you're setting a gate up.
-- **The event workspace's Timers screen → Tune** — the same page, opened inside your event.
-  **Back** returns you to the event rather than the global Timers page, which is what you want
-  when a heat is waiting.
+- **Timers on the home screen → Tune** — the timer's own baseline. This works before any event
+  exists, which is the usual case when you're first setting a gate up.
+- **Inside an event, on its Timers page → Tune** — the same page, opened within your event.
+  **Back** returns you to the event instead of the global list, which is what you want when a
+  heat is waiting.
 
-The page states which one it is editing at the top, so a reload — or the same link opened
+The page says which one it's editing at the top, so reloading — or opening the same link
 somewhere else — keeps the scope you started with.
 
-The button is only offered on a timer that has a gate to read, and is **disabled until the
-timer is connected** ("Connect ‹Timer› first — tuning reads its live signal").
+The button only appears on a timer that has a gate to read, and stays **disabled until the timer
+is connected**: *"Connect ‹Timer› first — tuning reads its live signal."*
 
 ::: tip Take it to the gate on your phone
-Tune is a real page with its own address, not a pop-up. On a GridFPV you reach over the
-network, open the same URL on a phone and watch the signal in your hand while you walk a quad
-through the gate — instead of walking back to the laptop after every adjustment. It survives a
-reload, too.
+Tune is a real page with its own web address, not a pop-up window.
+
+If you're running the web version, open the same address on your phone and watch the signal in
+your hand while you walk a drone through the gate. That beats walking back to the laptop after
+every change. It survives a reload too.
 :::
 
-## What you see
+## What you're looking at
 
 One column per node, laid out like RotorHazard's own tuning page:
 
-- The **live signal plot** for that node, updating continuously.
-- The **enter** and **exit** level lines drawn across it.
-- The **crossing band** — a shaded region that opens the moment the signal rises past *enter*
-  and closes when it falls back past *exit*. This is the thing that actually answers "did that
-  pass register?"; a bare signal number cannot.
-- The node's readouts underneath, and the pilot seated on it when there is one.
+- The **live signal graph** for that node, updating constantly.
+- The **enter** and **exit** lines drawn across it.
+- The **crossing band** — a shaded block that starts the moment the signal goes above *enter*
+  and ends when it falls back below *exit*.
+- The node's numbers underneath, and which pilot is on it.
 
-A node your timer has **never reported** is drawn as **dead** rather than as a flat quiet
-trace — the two look identical otherwise, and they have opposite fixes.
+**The crossing band is the thing to watch.** It answers "did that pass actually register?" A
+signal number on its own can't tell you that. If a drone flies through and no band appears, the
+gate did not count it.
 
-Likewise, "no signal" and "no link" are kept apart: if the feed itself has stopped, the page
-says so rather than showing you a quiet gate.
+A node your timer has **never reported** is drawn as **dead**, not as a flat quiet line. Those
+two look identical otherwise, and they need opposite fixes.
 
-## Set the enter and exit levels
+"No signal" and "no connection" are kept apart the same way. If the feed itself has stopped, the
+page says so rather than showing you a quiet gate.
 
-Each threshold has three controls, all editing the same number:
+## Set the enter and exit levels {#set-the-enter-and-exit-levels}
 
-- the **numeric box**, for a value you already know;
+Each level has three controls, all changing the same number:
+
+- the **number box**, for a value you already know;
 - the **slider**, for one you're feeling out;
-- the **draggable handle on the graph**, for one you can see.
+- the **handle on the graph**, for one you can see.
 
-**There is no Apply button.** The value goes to the timer as soon as you let go — so there is
-no step to forget and no tuning against a level the hardware never received.
+**There is no Apply button.** The value goes to the timer as soon as you let go. Nothing to
+forget, and no tuning against a level the hardware never received.
 
-What replaces the Apply button is a status on each threshold:
+Instead of an Apply button, each level shows a status:
 
 | Status | What it means |
 | --- | --- |
-| **Adjusting** | You are moving it right now; nothing has been sent yet. |
-| **Sending…** | Accepted by GridFPV, waiting to see it on the timer. |
-| **On timer** | The timer is confirmed holding this value. The resting state. |
-| **Not taken** | The timer kept reporting a different level — the write did not land. |
+| **Adjusting** | You're moving it right now. Nothing sent yet. |
+| **Sending…** | GridFPV took it and is waiting to see it on the timer. |
+| **On timer** | The timer confirmed it has this value. This is the normal resting state. |
+| **Not taken** | The timer kept reporting something else. The change did not land. |
 
-The confirmation is a real read-back from the timer, not just "the request returned 200". If a
-threshold says **Not taken**, the hardware did not take it, and it says so loudly rather than
-letting you tune against a fiction.
+That confirmation is a real read-back from the hardware, not just "the request didn't error". If
+it says **Not taken**, the timer did not accept it — and GridFPV says so loudly rather than
+letting you tune against a number that isn't really there.
 
-## Capture a level from a pass
+## Capture a level from a pass {#capture-a-level-from-a-pass}
 
-Instead of typing a number, you can let the timer measure one:
+Instead of guessing a number, you can let the timer measure one.
 
-> **Capture measures the level instead of you typing one. The timer watches this gate for three
-> seconds starting the moment you press, and sets the threshold from the signal it sees — so
-> press it, then fly the pass. Nothing is recorded unless a new level comes back.**
+**Capture watches the gate for three seconds starting the moment you press it**, and sets the
+level from the signal it sees. So press it first, *then* fly the pass.
 
 Use **Capture Enter at from a pass** or **Capture Exit at from a pass** on the node you're
-working on, then fly the pass within the three seconds. If nothing crosses, nothing changes.
+working on, then fly through within those three seconds. If nothing crosses, nothing changes.
 
 ## Set a node's channel
 
-Tuning a gate is meaningless until the node is listening on the channel it will actually race,
-so the frequency on each node is a dropdown you can set right here. GridFPV writes the band and
-channel to RotorHazard, not just a bare frequency, so RotorHazard's own page shows *R7* beside
-the number and you can verify the write landed.
+Tuning a gate is pointless if the node is listening on the wrong channel, so you can set the
+frequency right here from a dropdown.
 
-::: warning A heat will overwrite this — and that's correct
-Staging a heat re-tunes every node to the channel its seat is assigned. The channel you set
-here is a bench value for tuning, not a race assignment. Race channels come from the roster,
-the heat, or a [channel layout](/guide/running-an-event#channel-layouts).
+GridFPV writes the band and channel name to RotorHazard, not just a bare number, so
+RotorHazard's own screen shows *R7* next to the frequency and you can check the change landed.
+
+::: warning Starting a heat will overwrite this, and that's correct
+Staging a heat re-tunes every node to the channel its seat is assigned.
+
+The channel you set here is a bench value for tuning, not a race assignment. Race channels come
+from the roster, the heat, or a
+[channel layout](/guide/running-an-event#channel-layouts).
 :::
 
-::: warning Changing the channel does not move the thresholds
-RotorHazard keeps a node's frequency and its enter/exit levels in the same place, so switching
-a node's channel leaves the old channel's levels sitting there — they *look* fine. Fly a pass
-on the new channel before you trust them.
+::: warning Changing the channel does not move the levels
+RotorHazard stores a node's frequency and its enter/exit levels together, so switching a node's
+channel leaves the old channel's levels sitting there. They *look* fine.
+
+Fly a pass on the new channel before you trust them.
 :::
 
-## When tuning is refused
+## When tuning is refused {#when-tuning-is-refused}
 
-Changing a threshold changes which laps the gate counts, so GridFPV refuses a write while a
-**competition heat is running** on that timer:
+Changing a level changes which laps the gate counts. So GridFPV refuses while a **competition
+heat is running** on that timer:
 
 > *A competition heat is running — changing a gate threshold now would change which laps it
 > counts. Tuning resumes when the heat ends.*
 
-This is checked on every adjustment, not once when the page opens — a heat that goes live while
-you're standing at the gate starts refusing mid-session.
+This is checked on every change, not once when the page opens. A heat that starts while you're
+standing at the gate will start refusing mid-session.
 
-**Open practice is tunable while it runs.** Practice is excluded from scoring, so there is no
-result to corrupt — and pilots in the air is exactly the moment you want to be tuning. With no
-heat on the timer at all, tuning simply works.
+**Practice is different — you can tune during it.** Practice isn't scored, so there's no result
+to damage. And pilots being in the air is exactly when you want to be tuning. With no heat on
+the timer at all, tuning just works.
 
-## Watching the gate mid-race
+## Watching the gate during a race
 
-You can't tune during a competition heat, but you can still *look*. Race Control carries a
-read-only **Gate signal** strip — trace, threshold lines and crossing marks per gate, and
-nothing that writes. It is collapsed by default and remembers that per event, and even
-collapsed its header carries a live chip per gate, so a dead node is visible without opening
-anything.
+You can't tune during a competition heat, but you can still **look**.
 
-That is what tells you whether a lap that didn't register was a craft producing no signal, a
-craft crossing under the enter threshold, or no crossing at all — three faults with three
-different responses that all look the same on the leaderboard.
+Race Control has a read-only **Gate signal** strip: the trace, the level lines and the crossing
+marks for each gate, and nothing that changes anything. It's collapsed by default and remembers
+that per event. Even collapsed, its header shows a live dot per gate, so a dead node is obvious
+without opening it.
+
+That's what tells you which of three problems you're looking at when a lap doesn't appear:
+
+1. the drone put out **no signal at all** — a dead video transmitter, or the wrong channel;
+2. the drone **crossed but not strongly enough** to trip the gate — a levels problem, fix it here
+   after the heat;
+3. the drone **never crossed** — they missed the gate.
+
+All three look identical on the leaderboard. They need three different responses.
+
+## A gate that reports the same pass twice
+
+If a gate is very sensitive, it can report **one** drone going past as several crossings a
+fraction of a second apart. That's not a levels problem exactly — the gate is working, just
+enthusiastically.
+
+GridFPV handles this with the timer's **same-pass window**, which groups those repeats together
+and keeps them out of your lap list. See
+[gate bounce](/guide/timers#gate-bounce-the-same-pass-window).
+
+It's worth knowing the difference:
+
+- **Missing laps** → the enter and exit levels are wrong. Fix them on this page.
+- **The same lap counted several times** → gate bounce. Handled by the same-pass window, though
+  a lot of it is a hint your gate is more sensitive than it needs to be.

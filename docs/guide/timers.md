@@ -1,293 +1,346 @@
 # Connecting a Timer
 
-A **timer** is GridFPV's source of truth for what happens on the track — every time a drone
-crosses the gate. You set a timer up **once** under **Timers** on the home hub, then **select
-it for an event**. This page covers the built-in Mock timer, connecting RotorHazard (including
-the required GridFPV plugin), configuring nodes and channels, and the heat lifecycle from the
-race director's seat.
+A **timer** is the hardware that watches the gate and tells GridFPV every time a drone goes
+past. It's where all your lap data comes from.
 
-## The built-in Mock timer
+You set a timer up **once** under **Timers** on the home screen, then **pick it for an event**.
 
-The **Mock** timer is a built-in simulator. It produces realistic gate crossings with no
-hardware at all, so you can learn the whole race flow, rehearse an event setup, or demo
-GridFPV on a single laptop. The Mock timer ships with the app and is always ready — there is
-nothing to connect, and it needs no plugin.
+This page covers the built-in fake timer, connecting RotorHazard (including the plugin you
+need), setting up nodes and channels, and the states a heat moves through.
 
-To add or tune one:
+## The built-in Mock timer {#the-built-in-mock-timer}
 
-1. Open **Timers** on the home hub and click **+ Add timer** (a built-in Mock is already
-   there to use as-is — it carries a **Built-in** badge and cannot be removed).
-2. Set the **Kind** to **Mock (synthetic)**.
-3. Optionally adjust:
-   - **Laps** — how many laps each simulated pilot flies (default 3).
-   - **Lap pace (ms)** — the nominal time for one simulated lap (default 30000, i.e. 30s).
-4. Save. Now select the Mock timer for your event (in the [setup
-   wizard](/guide/running-an-event#step-1-timer-channels) or on the event's Timers screen).
+The **Mock** timer is a pretend timer built into GridFPV. It invents realistic gate crossings
+with no hardware at all.
 
-::: tip Test the whole flow with the simulator
-Add a Mock timer, create an event, and run a heat through **Stage → Start → finish →
-Finalize**. It is the fastest way to learn race control and to sanity-check an event before
-you are at the field with real gear.
+Use it to learn the app, practise setting up an event, or demo GridFPV on one laptop. It's
+always there, nothing to connect, and no plugin needed.
+
+To add or adjust one:
+
+1. Open **Timers** on the home screen. A Mock timer is already there with a **Built-in** badge,
+   and you can use it as-is. To make another, click **+ Add timer**.
+2. Set **Kind** to **Mock (synthetic)**.
+3. Optionally change:
+   - **Laps** — how many laps each fake pilot flies (default 3).
+   - **Lap pace (ms)** — roughly how long one fake lap takes (default 30000, which is 30
+     seconds).
+4. Save, then pick it for your event.
+
+::: tip Rehearse the whole thing with no hardware
+Add a Mock timer, make an event, and run a heat through **Stage → Start → finish → Finalize**.
+It's the fastest way to learn race control, and a good sanity check before you're standing at
+the field with real gear.
 :::
 
-## RotorHazard
+## RotorHazard {#rotorhazard}
 
-[RotorHazard](https://github.com/RotorHazard/RotorHazard) is a popular open-source RF timing
-system. GridFPV connects to it over its web server and talks to the **GridFPV RotorHazard
-plugin** running inside RH (RotorHazard **4.3.0 or newer**).
+[RotorHazard](https://github.com/RotorHazard/RotorHazard) is a popular open-source timing
+system. GridFPV talks to it over its web address, and needs the **GridFPV RotorHazard plugin**
+installed on it. RotorHazard must be **version 4.3.0 or newer**.
 
-::: danger The GridFPV plugin is required
-**Stock RotorHazard is not enough.** GridFPV will connect to a plugin-less RotorHazard so you
-can diagnose it — but it **refuses to select that timer for an event**, and refuses to arm a
-heat on it. The plugin is what lets GridFPV own the race: it neutralizes RotorHazard's own
-race format and min-lap filter so every crossing reaches GridFPV and RH makes no scoring
-decisions of its own.
+::: danger The plugin is required
+**A plain RotorHazard is not enough.** GridFPV will connect to one without the plugin so you can
+check what's wrong — but it **won't let you pick that timer for an event**, and won't start a
+heat on it.
 
-Installing it is a few clicks from inside GridFPV — see [Install the GridFPV
-plugin](#install-the-gridfpv-plugin) below. The Mock timer needs no plugin.
+The plugin is what lets GridFPV run the race. It switches off RotorHazard's own race format and
+its own lap filtering, so every crossing reaches GridFPV and RotorHazard doesn't make any
+scoring decisions of its own.
+
+Installing it is a few clicks from inside GridFPV — see
+[Install the GridFPV plugin](#install-the-gridfpv-plugin). The Mock timer needs no plugin.
 :::
 
 ### Add the timer
 
-1. Make sure your RotorHazard server is running and reachable on your network. Note its
-   **server URL** — the same address you open RotorHazard's own web interface at, for example
+1. Make sure your RotorHazard is running and reachable on your network. Note its **web
+   address** — the same one you'd open RotorHazard in a browser with, like
    `http://localhost:5000` or `http://192.168.1.40:5000`.
-2. In GridFPV, open **Timers → + Add timer** and set the **Kind** to **RotorHazard**.
-3. Enter the **URL** and save.
+2. In GridFPV, open **Timers → + Add timer** and set **Kind** to **RotorHazard**.
+3. Enter the address and save.
 
-::: warning The URL is dialed exactly as entered
-Use plain `http` (not `https`), and no trailing slash. If you later **Edit** the timer and
-change its URL, GridFPV re-dials the new address straight away — you do not have to remove and
-re-add the timer.
+::: warning Type the address exactly
+Use plain `http`, not `https`, and no slash on the end.
+
+If you later edit the timer and change the address, GridFPV dials the new one straight away. You
+don't need to delete and re-add it.
 :::
 
 ### Connect it and check it works {#connect-and-test}
 
-You do **not** need an event to test a timer. Each RotorHazard row on the **Timers** page
-carries a **Connect** button; press it and GridFPV dials the URL and holds the connection open.
-The button becomes **Disconnect** while the hold is up, so you can let it go again.
+**You don't need an event to test a timer.** Every RotorHazard row on the Timers page has a
+**Connect** button. Press it and GridFPV dials the address and holds the connection open. The
+button turns into **Disconnect**.
 
-This is the "am I plugged in?" check to run when you arrive at a venue — before you have an
-event, a roster, or a single heat.
+This is your "am I plugged in?" check when you arrive at a venue — before you have an event, a
+roster or a single heat.
 
-While a timer is held, the row tells you where things stand in plain language:
+While connected, the row tells you where things stand:
 
 | What you see | What it means |
 | --- | --- |
-| **Connecting…** | GridFPV is dialing. |
-| **Reachable — this timer is answering.** | The URL is right and RotorHazard is up. |
+| **Connecting…** | GridFPV is dialling. |
+| **Reachable — this timer is answering.** | The address is right and RotorHazard is up. |
 | **Could not reach this timer. Check the URL, and that RotorHazard is running.** | Nothing answered. |
-| **The connection dropped. Retrying…** | It answered once and went away; GridFPV keeps retrying. |
+| **The connection dropped. Retrying…** | It answered once, then went away. GridFPV keeps trying. |
 
-The status pill beside it shows the raw state — **Ready** (the Mock, which needs nothing),
-**Configured** (a RotorHazard timer that has not been dialed yet), **Connecting**,
-**Connected**, **Disconnected**, or **Error**.
+Next to that is a status pill: **Ready** (the Mock, which needs nothing), **Configured** (a
+RotorHazard you haven't dialled yet), **Connecting**, **Connected**, **Disconnected**, or
+**Error**.
 
-Once a RotorHazard timer is connected, a **plugin badge** appears next to the pill:
+Once connected, a **plugin badge** appears:
 
-- **plugin ✓** — the GridFPV plugin is present and healthy. Hover it for the plugin and RHAPI
-  versions.
-- **⚠ plugin missing** — connected, but stock RotorHazard. Click the badge for the install
-  guide.
-- **⚠ plugin update** — the plugin is there but speaks a protocol this GridFPV does not.
-  Click the badge; the guide names the mismatch.
+- **plugin ✓** — the plugin is there and healthy. Hover for version numbers.
+- **⚠ plugin missing** — connected, but no plugin. Click the badge for the install guide.
+- **⚠ plugin update** — the plugin is there but it's the wrong version for this GridFPV. Click
+  the badge; it explains the mismatch.
 
-Before a timer has ever connected there is **no badge at all** — plugin presence is only
-knowable over a live connection, so "not yet connected" is its own state, not "plugin missing".
+Before a timer has ever connected there's **no badge at all**. GridFPV can only tell whether the
+plugin is there over a live connection, so "not connected yet" is its own state — not "plugin
+missing".
 
 ### Install the GridFPV plugin {#install-the-gridfpv-plugin}
 
-Click the **⚠ plugin missing** badge on the timer's row. The install guide walks the whole job
-without ever leaving GridFPV:
+Click the **⚠ plugin missing** badge. The guide walks the whole job without leaving GridFPV:
 
-1. **Download `gridfpv-plugin.zip`** with the button in the dialog. GridFPV serves the bundle
-   itself — there is nothing to fetch from the internet. The dialog reports whether the
-   download succeeded, and where it went (your browser's usual Downloads folder).
-2. **Unzip it.** Inside is a single **`gridfpv`** folder. *That folder* is what you copy — not
-   the zip, and not the wrapper folder some unzippers add around it.
-3. **Copy the `gridfpv` folder into RotorHazard's `plugins/` directory**, so you end up with
-   `plugins/gridfpv/` holding `__init__.py` and `manifest.json` **directly** inside it, with no
+1. **Download `gridfpv-plugin.zip`** using the button in the dialog. GridFPV has the file built
+   in — nothing is fetched from the internet. The dialog tells you where it saved.
+2. **Unzip it.** Inside is one folder called **`gridfpv`**. *That folder* is what you copy — not
+   the zip, and not any extra wrapper folder your unzipper adds around it.
+3. **Copy the `gridfpv` folder into RotorHazard's `plugins/` folder.** You should end up with
+   `plugins/gridfpv/` containing `__init__.py` and `manifest.json` **directly** inside — no
    extra folder in between.
-4. **Press Restart timer** in the dialog. RotorHazard only loads plugins at startup, so the
-   folder you just dropped in is inert until it restarts — and GridFPV can restart it for you
-   over the connection it is already holding. It drops off for a few seconds, reconnects by
-   itself, and the badge turns green.
+4. **Press Restart timer** in the dialog. RotorHazard only loads plugins when it starts, so the
+   folder you just copied does nothing until it restarts. GridFPV can restart it for you over
+   the connection it already has. It disappears for a few seconds, comes back, and the badge
+   turns green.
 
 ::: tip Where is RotorHazard's `plugins/` folder?
-It lives in RotorHazard's **data directory**, which depends on how RH was installed. The
-dialog has a "Where is RotorHazard's `plugins/` folder?" section with the details; the short
-version:
+It's in RotorHazard's **data folder**, and where that is depends on how RotorHazard was
+installed. The dialog has the full details. The short version:
 
-- **Usually `~/rh-data/plugins/`** — on a Raspberry Pi, `/home/pi/rh-data/plugins/`.
-- **Older, in-place installs:** `<RotorHazard>/src/server/plugins/`.
-- **Custom or vendor timers** (NuclearHazard and friends) put it somewhere else again. Whatever
-  the layout, it is the `plugins/` folder beside RotorHazard's `config.json` and `database.db`
-  — and RH logs `Data path: …` in its startup log.
+- **Usually `~/rh-data/plugins/`** — on a Raspberry Pi that's `/home/pi/rh-data/plugins/`.
+- **Older installs:** `<RotorHazard>/src/server/plugins/`.
+- **Custom or vendor timers** (NuclearHazard and similar) put it somewhere else again.
 
-**The folder often does not exist yet.** A fresh RotorHazard with no user plugins has none —
-if there is no `plugins/` in the data directory, create it yourself.
+Whatever the layout, it's the `plugins/` folder sitting next to RotorHazard's `config.json` and
+`database.db`. RotorHazard also prints `Data path: …` in its startup log.
+
+**The folder often doesn't exist yet.** A fresh RotorHazard with no plugins has none. If there's
+no `plugins/` folder, make one.
 :::
 
-::: warning Restarting is refused mid-race
-**Restart timer** restarts your timing hardware, so GridFPV asks you to confirm it — and the
-Director refuses it outright while a heat is staged, armed or running on that timer. The
-refusal names the heat.
+::: warning Restarting is refused during a race
+**Restart timer** restarts your actual timing hardware, so GridFPV asks you to confirm — and
+refuses outright while a heat is staged, armed or running on that timer. The refusal names the
+heat.
 :::
 
-### Select it for an event
+### Pick it for an event
 
-With the plugin present, **select the RotorHazard timer for your event** — on the event
-workspace's **Timers** screen, or in the [setup
-wizard](/guide/running-an-event#step-1-timer-channels). GridFPV keeps the link alive between
-heats.
+With the plugin present, pick the timer on the event's **Timers** page or in the
+[setup wizard](/guide/running-an-event#step-1-timer-channels). GridFPV keeps the connection
+alive between heats.
 
-If the plugin is not present, the row says so and tells you what to do instead of just greying
-out — for example:
+If the plugin isn't there, the row tells you what to do rather than just going grey:
 
 > *‹Timer› isn't running the GridFPV plugin, which Grid requires to race a RotorHazard timer.
 > Install it, restart RotorHazard, then tick it for this event.*
 
-or, for a timer that has never been dialed:
+Or, for one that's never been dialled:
 
 > *‹Timer› hasn't been connected yet, so Grid can't tell whether it's running the GridFPV
 > plugin. Connect it first, then tick it for this event.*
 
-::: tip Double-detections are handled in GridFPV
-A gate reflection can register two crossings milliseconds apart. The plugin switches off
-RotorHazard's own min-lap filter so **every** crossing reaches GridFPV, and GridFPV then
-enforces its own per-round **minimum lap time** (default 5s on new rounds): a crossing that
-would close a shorter lap is auto-removed, visibly, with a marshal **Restore** override. See
-[Marshaling](/guide/marshaling#the-removal-record).
+## Gate bounce: the same-pass window {#gate-bounce-the-same-pass-window}
+
+Sometimes a gate reports **one drone going past as two, three or four crossings**, a fraction of
+a second apart.
+
+Nothing went wrong with the flying. When a drone sits right in the gate's strongest zone, its
+video signal bounces off things and reaches the receiver more than once. The gate is doing its
+job — it just did it several times for one pass.
+
+GridFPV deliberately switches off RotorHazard's own filter for this, so **every** crossing
+reaches GridFPV and GridFPV decides what's real. That means GridFPV needs its own answer, and
+the **same-pass window** is it.
+
+### What the setting does
+
+The same-pass window is a length of time on the **timer** form:
+
+> *Two crossings closer together than this are one physical pass — a gate bounce, not a lap.*
+
+- **Default: 1 second.** That's comfortably longer than a bounce burst (usually a tenth of a
+  second or so) and far shorter than any real lap.
+- **Maximum: 2 seconds.** Nobody flies a two-second lap, so the setting can never eat a real one
+  no matter what you type.
+- **Set it to 0** to switch it off completely.
+
+Crossings caught by this rule are removed from scoring, but never hidden. They appear grouped in
+[Marshaling](/guide/marshaling#the-removal-record) as *"same pass (gate bounce), auto-removed"*,
+with a Restore on each one. They also stay **silent** — no beep — because nothing new actually
+happened.
+
+### Why it's on the timer, not the round
+
+Bounce is a property of **that gate**: its antenna, how sensitive it is, where it sits on the
+track. It's the same for every race you run on it. So it belongs to the timer, and you set it
+once.
+
+Compare that with the round's **min lap time**, which is a **racing rule** about your track —
+"a lap can't possibly be faster than this." Different question, different owner.
+
+| | Same-pass window | Min lap time |
+| --- | --- | --- |
+| **Set on** | The timer | The round |
+| **Question it answers** | "Did the gate report one pass twice?" | "Is this too fast to be a real lap?" |
+| **About** | Your hardware | Your track |
+| **Typical value** | 1 second | 5 seconds |
+| **Does it beep?** | No — nothing new happened | Yes — the gate really saw something |
+
+### Changing it later is safe
+
+The window in force is **recorded when the heat arms**, and finished races keep the value they
+raced under.
+
+So you can change this setting mid-event without quietly re-scoring races that already ran. New
+setting, next race. Your finished results don't move.
+
+::: tip Seeing lots of bounce groups?
+That's your gate telling you it's very sensitive. It's not breaking anything — GridFPV is
+handling it — but it's worth a look at the gate's enter and exit levels, or moving the antenna.
+See [Tuning a Gate](/guide/tuning).
 :::
 
-## Nodes and channels
+## Nodes and channels {#nodes-and-channels}
 
 ### Channels vs nodes {#channels-vs-nodes}
 
-These are two different things, and the difference matters when you set up a timer:
+These are two different things, and mixing them up causes real problems:
 
-- **Nodes** are the timer's physical receivers — its **node count caps how many pilots can be
-  in one heat**. An 8-node timer runs heats of up to 8 pilots.
-- **Channels** are the frequencies the timer can tune to. A timer can offer **more channels
-  than it has nodes** — say 8 available channels on a 4-node timer — so you can choose which
-  channels a given heat uses.
+- **Nodes** are the timer's physical receivers. **The number of nodes is the maximum number of
+  pilots in one heat.** An 8-node timer runs heats of up to 8 pilots.
+- **Channels** are the frequencies the timer can listen on. A timer can offer **more channels
+  than it has nodes** — say 8 channels on a 4-node timer — so you can choose which channels a
+  given heat uses.
 
-### Configure the nodes {#configure-nodes}
+Think of nodes as the number of chairs, and channels as the list of radio stations any one chair
+can be tuned to.
 
-Every timer row carries a **node reading** you can click — it opens the node configuration for
-that timer.
+### Set up the nodes {#configure-nodes}
 
-- GridFPV **asks the timer how many nodes it has** when it connects, and the dialog shows both
-  numbers side by side: **Timer reports** and **GridFPV uses**. If they disagree the row flags
-  it too (**Timer reports 4**). Getting this wrong is expensive — a heat seated for eight
-  pilots on a four-node timer records nothing for four of them.
-- **Follow the timer** clears any count you pinned by hand, so the hardware's own reading is
-  the width again. That is the one-click repair for a timer stuck at a stale number.
-- **Enabled nodes** lets you switch off individual receivers — a dead node you do not want
-  seated. The number of *enabled* nodes is what caps a heat's size, and a node the timer has
-  never reported is flagged as such.
-- Nodes are named **Node 1**, **Node 2**, … throughout the console.
+Every timer row shows a **node reading** you can click to open its node settings.
 
-You can still pin a **Node count** by hand on the timer form (default 8) when a timer cannot
-report one.
+- GridFPV **asks the timer how many nodes it has** when it connects, and shows both numbers:
+  **Timer reports** and **GridFPV uses**. If they disagree, the row flags it.
+
+  Getting this wrong is expensive. A heat set up for eight pilots on a four-node timer records
+  nothing at all for four of them.
+- **Follow the timer** clears any number you pinned by hand and goes back to what the hardware
+  says. That's the one-click fix for a timer stuck on a stale number.
+- **Enabled nodes** lets you switch off individual receivers — a dead one you don't want anybody
+  seated on. The number of *enabled* nodes is what caps a heat.
+- Nodes are called **Node 1**, **Node 2**, and so on throughout GridFPV.
+
+You can still pin a **Node count** by hand on the timer form for a timer that can't report one.
 
 ### Pick the available channels {#available-channels}
 
-The timer form's **Available channels** picker is the global answer to *what may this timer
-ever use?* — ticked from the standard FPV catalog (Raceband, Fatshark, and so on), grouped by
-band.
+The **Available channels** picker answers: *what channels may this timer ever use?* Tick them
+from the standard FPV list (Raceband, Fatshark and so on), grouped by band.
 
-- Each band has a **select-all box**. It is **tri-state**: empty when none of the band is
-  ticked, indeterminate when some are, checked when all are. Clicking an indeterminate box
-  **fills** the band (it never throws away a subset you picked by hand); clicking a full band
-  clears it.
-- Each channel is labelled with its frequency — *Raceband R7 — 5880* — because that is what
-  you are matching against a VTX or RotorHazard's own screen.
-- **Channel capability** says whether the timer is **Fixed (built-in set)** — it can only tune
-  the channels it declares — or **Flexible (any channel)**. A flexible timer also accepts a
-  **Custom channel (MHz)**: a raw centre frequency that is not in the catalog.
+- Each band has a **select-all box** with three states: empty when none are ticked, part-filled
+  when some are, checked when all are. Clicking a part-filled box **fills** the band — it never
+  throws away a selection you made by hand. Clicking a full one clears it.
+- Each channel shows its frequency — *Raceband R7 — 5880* — because that's what you're matching
+  against a video transmitter or RotorHazard's own screen.
+- **Channel capability** says whether the timer is **Fixed** (it can only use the channels it
+  declares) or **Flexible** (any channel). A flexible timer also accepts a **custom channel** in
+  MHz for something not on the list.
 
-::: tip This is the global record, not the event's
-Ticking channels here edits the **timer**, everywhere it is used. Deciding *which node flies
-which channel in this event* is a separate, event-owned thing — see [channel
-layouts](/guide/running-an-event#channel-layouts).
+::: tip This is the timer's list, not the event's
+Ticking channels here changes the **timer**, everywhere it's used.
+
+Deciding *which node flies which channel in this event* is separate — see
+[channel layouts](/guide/running-an-event#channel-layouts).
 :::
 
-### Assigning channels
+### How pilots get channels
 
 Per-pilot channels come from your event's **primary timer**:
 
-- **Time Trials** use **static** channels — each pilot keeps a fixed channel you assign on
+- **Time Trials** use **fixed** channels. Each pilot keeps one channel, assigned on
   [Classes & Roster](/guide/running-an-event#stage-1-classes-roster). Use **Auto-assign
-  channels** to spread the pool across the field, then override anyone as needed.
-- **Head-to-Head rounds** assign channels **per heat** from the timer's pool, so each group
-  gets clean, conflict-free frequencies.
+  channels** to spread them out, then change anyone you need to.
+- **Head-to-Head** assigns channels **per heat** from the timer's pool, so each group gets clean
+  frequencies.
 
-For full control over which node flies which frequency, define
-[channel layouts](/guide/running-an-event#channel-layouts) on the event and name them on a
-round.
+For full control, define [channel layouts](/guide/running-an-event#channel-layouts) on the event
+and name them on a round.
 
 ## Tuning a gate
 
-If a gate is missing laps — or recording laps nobody flew — its detection thresholds are the
-thing to look at. The **Tune** button on a connected timer's row opens the per-node tuning
-page. See [Tuning a Gate](/guide/tuning).
+If a gate is missing laps — or recording laps nobody flew — its detection levels are what to
+look at. The **Tune** button on a connected timer opens the per-node tuning page. See
+[Tuning a Gate](/guide/tuning).
 
-## The heat lifecycle
+## The heat lifecycle {#the-heat-lifecycle}
 
-Every heat moves through the same clear sequence of states. Knowing them makes race control
-predictable:
+Every heat moves through the same states. Knowing them makes race control predictable:
 
 | State | What it means |
 | --- | --- |
 | **Scheduled** | The heat exists with its lineup, but hasn't started. |
-| **Staged** | The staging countdown is underway — pilots to the line. It is informational; nothing auto-advances. |
-| **Armed** | The start procedure is running (announce → randomized hold → tone). |
-| **Running** | The race is live; gate crossings count. |
-| **Unofficial** | The race has closed but the result is still provisional — late crossings and corrections can still land. |
-| **Final** | The result is locked in. |
+| **Staged** | The "pilots to the line" countdown is running. Nothing happens on its own when it ends. |
+| **Armed** | The start procedure is running: the random wait, then the tone. |
+| **Running** | The race is live. Gate crossings count. |
+| **Unofficial** | The race is over but the result isn't locked. Late crossings and fixes can still land. |
+| **Final** | The result is locked. |
 
-### The race director's commands
+### Your controls
 
-From Race Control you drive the heat with a few actions:
+- **Stage** — move a Scheduled heat to Staged and start the countdown.
+- **Start** — arm a Staged heat and run the start procedure. It finishes by itself.
+- **Stop** — end a running race now. Pilots land, and the result stands as flown.
+- **Finalize** — lock an Unofficial heat as Final. **Advance** moves to the next heat.
+- **Abort** / **Restart** — reset the heat all the way back to Scheduled so you can re-stage it.
+- **Discard** — throw the heat out entirely.
 
-- **Stage** — move a Scheduled heat to Staged and start the staging countdown.
-- **Start** — arm a Staged heat and run the start procedure (the countdown runs itself).
-- **Stop** — end a Running race now; pilots land and the result stands as flown.
-- **Finalize** — lock an Unofficial heat as Final; **Advance** moves on to the next heat.
-- **Abort** / **Restart** — reset the heat all the way back to **Scheduled** so you can
-  re-stage it; **Discard** throws the heat out entirely. (The destructive ones ask for
-  confirmation.)
+The destructive ones ask you to confirm.
 
 ::: info Practice heats end differently
-A Practice heat has no result to make official, so it is never offered **Finalize**,
-**Advance** or **Revert**. Its end-of-run action is **Run again** — the same reset, named for
-what practice actually does. See [Practice](/guide/formats#practice).
+A Practice heat has no result to make official, so it never offers **Finalize**, **Advance** or
+**Revert**. Its end-of-run button is **Run again**. See [Practice](/guide/formats#practice).
 :::
 
 ### The start procedure
 
-When you **Start** a staged heat, it arms and runs a start procedure before going live:
+When you press **Start** on a staged heat:
 
-1. **A short randomized hold** — a brief delay (a couple of seconds, randomized per the
-   round's start procedure) so pilots can't anticipate the exact go.
-2. **The start tone** — GridFPV plays the audible go-tone itself.
+1. **A short random wait** — a couple of seconds, different every time, so pilots can't guess the
+   exact go.
+2. **The start tone** — GridFPV plays it.
 
-The instant the hold elapses, the heat moves to **Running** on its own — listen for the
-tone. Procedure audio (start tone, end-of-race countdown pips, race-end buzzer) is
-**always on** and plays whatever page you're on; the spoken **lap callouts** are the
-informational layer, muted by the **Callouts** toggle in Race Control.
+The instant the wait ends, the heat goes **Running** on its own. Listen for the tone.
+
+Race sounds — start tone, the last-5-seconds pips, and the end buzzer — are **always on** and
+play whatever page you're looking at. The spoken **lap callouts** are the extra layer, muted by
+the **Callouts** switch in Race Control.
 
 ### How a heat ends
 
-A Running heat **ends on its own** when its [win condition](/guide/formats#win-conditions) is
-met, plus a **grace window** (default 30s) that lets late crossings still count. The heat then
-moves to **Unofficial**, where you can review and correct it in
-[Marshaling](/guide/marshaling) before you **Finalize** it. To end it early, press **Stop**.
+A running heat **ends by itself** when its [win condition](/guide/formats#win-conditions) is
+met, plus a **grace window** (30 seconds by default) so a late crossing still counts.
+
+It then goes to **Unofficial**, where you can review and fix it in
+[Marshaling](/guide/marshaling) before you **Finalize**. To end early, press **Stop**.
 
 ### Choosing the current heat
 
-Race Control runs **one heat at a time**. A heat picker at the top lets you choose which heat
-is current — but it **locks once a heat is staged or running**, so you can't switch mid-race.
-Finalize or abort the current heat to unlock it. Filled heats are named **&lt;Round&gt; Heat
-N** (for example *Qualifying Heat 1*), which is what you'll see in the picker.
+Race Control runs **one heat at a time**. The picker at the top chooses which — but it **locks
+once a heat is staged or running**, so you can't switch mid-race. Finalize or abort first.
+
+Heats are named **&lt;Round&gt; Heat N**, like *Qualifying Heat 1*, which is what you'll see in
+the picker.

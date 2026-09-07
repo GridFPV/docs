@@ -1,139 +1,140 @@
 # Getting Started
 
-GridFPV is a self-hosted app for timing and managing FPV drone races. This page gets you
-from zero to a running GridFPV in a few minutes, then orients you on what you see on first
-launch.
+GridFPV is an app for timing and running FPV drone races. This page gets you from nothing to
+a running race in a few minutes.
 
-There are **two ways to run GridFPV**, and they give you the exact same app:
+There are **two ways to run GridFPV**. Both give you the exact same app:
 
-1. **The native portable app** — the easiest way. Download one file, run it, and a GridFPV
-   window opens. Best for running an event on a single laptop at the field.
-2. **The hosted web app** — run GridFPV as a server and open it in your browser. Best when
-   you want other devices on the network (or a second screen) to reach the same event.
+1. **The desktop app** — the easy way. Download one file, run it, and a GridFPV window opens.
+   Best for running an event on one laptop at the field.
+2. **The web version** — run GridFPV as a small server and open it in a browser. Best when you
+   want a second screen, or when other people on your network need to see the same event.
 
-Pick whichever fits how you work. You can switch later — it is the same application either
-way, and they read and write the same data folder.
+Pick whichever suits you. You can switch later. It is the same app, and both read the same
+data folder.
 
-## Option A: The native portable app (recommended)
+## Option A: The desktop app (start here)
 
-The native app is **self-contained**: there is nothing to install, no runtime to set up, and
-no separate database. You download a single executable, run it, and it opens its own window.
+The desktop app is **one file**. Nothing to install, no database to set up.
 
-### 1. Download
+### 1. Download it
 
-Grab the build for your operating system from the
+Get the file for your computer from the
 [GridFPV releases page](https://github.com/GridFPV/gridfpv/releases):
 
 - **Windows** — `gridfpv-desktop-windows-x86_64.exe`
 - **Linux** — `gridfpv-desktop-linux-x86_64`
 - **macOS** (Apple Silicon) — `gridfpv-desktop-macos-arm64`
 
-::: tip
-Put the downloaded file somewhere it can stay, like a `GridFPV` folder in your Documents or
-on a USB stick you bring to the field. GridFPV stores its event data **right next to the
-executable** (see below), so keeping the app in a stable location keeps your data with it.
+::: tip Put it somewhere it can stay
+GridFPV saves your race data **in a folder right next to this file**. So put it somewhere
+permanent — a `GridFPV` folder in Documents, or a USB stick you bring to the field. If you move
+the app, move the data folder with it.
 :::
 
 ### 2. Run it
 
-- **Windows** — double-click the `.exe`. If Windows SmartScreen warns about an
-  unrecognized app, choose **More info → Run anyway**.
-- **Linux** — mark it executable, then run it:
+- **Windows** — double-click the `.exe`. If Windows warns you about an unrecognised app, click
+  **More info → Run anyway**.
+- **Linux** — make it runnable, then run it:
 
   ```sh
   chmod +x ./gridfpv-desktop-linux-x86_64
   ./gridfpv-desktop-linux-x86_64
   ```
 
-- **macOS** — mark it executable, and on first launch **right-click → Open** (Gatekeeper
-  blocks a plain double-click on unsigned apps):
+- **macOS** — make it runnable, then **right-click → Open** the first time. A normal
+  double-click will be blocked, because the app is not signed by Apple.
 
   ```sh
   chmod +x ./gridfpv-desktop-macos-arm64
   ```
 
-A GridFPV window opens. That is it — you are running. The version you're on shows in the
-bottom-right corner of the console (quote it in any bug report).
+A GridFPV window opens. That is it — you are running.
 
-### 3. Where your data lives
+The version number is in the **bottom-right corner** of the screen. Include it if you ever
+report a bug.
 
-When you run the native app, GridFPV creates a **`gridfpv-data/`** folder **next to the
-executable** and keeps everything there — your pilots, classes, events, and the full record
-of every race. To back up or move an event, copy that folder. To start completely fresh,
-you can move or rename it (GridFPV will create a new empty one on next launch).
+### 3. Where your race data is kept
 
-::: warning
-Because the data lives next to the executable, don't run the app from a read-only location
-(like directly inside a mounted disk image / DMG, or a locked download folder). Move it to a
-normal folder first so GridFPV can create `gridfpv-data/`.
+GridFPV makes a folder called **`gridfpv-data/`** right beside the app file. Everything lives
+there: your pilots, your classes, your events, and every lap of every race.
+
+- **To back it up**, copy that folder.
+- **To move to another computer**, copy the app and that folder together.
+- **To start completely fresh**, rename or move the folder. GridFPV makes a new empty one next
+  time it starts.
+
+::: warning Don't run it from a locked folder
+GridFPV needs to create `gridfpv-data/` beside itself. So don't run it straight out of a
+disk image, a zip file, or anywhere read-only. Move it to a normal folder first.
 :::
 
-## Option B: The hosted web app
+## Option B: The web version
 
-Running GridFPV as a server lets you open the console in a regular web browser and reach the
-same event from other devices on your network — handy for a second display, or for letting
-pilots check standings on their phones over the local network.
+Running GridFPV as a server lets you open it in a browser, including from other devices on
+your network. Handy for a second screen, or for letting pilots check standings on their phones.
 
 ### 1. Start the server
 
-Run the GridFPV server executable (the **Director**). It starts up and begins serving the
-web console locally, printing the address to open — typically:
+Run the GridFPV server file. It starts up and prints the address to open, usually:
 
 ```
 http://localhost:8080
 ```
 
-### 2. Open it in your browser
+### 2. Open it in a browser
 
-Open that address in any modern browser (Chrome, Firefox, Edge, Safari). The GridFPV console
-loads in the page. You are now running the same app as the native window, just in a browser
-tab.
+Open that address in Chrome, Firefox, Edge or Safari. The GridFPV console loads in the page.
+Same app, just in a tab.
 
-::: tip Reaching it from other devices
-On the same network, other devices can open the console using the host machine's local IP
-address instead of `localhost` (for example `http://192.168.1.50:8080`). The race director's
-own machine is trusted automatically and needs no login; reaching control from another device
-may require a passphrase the director sets. See [Connecting a Timer](/guide/timers) and the
-[FAQ](/guide/faq) for more.
+::: tip Getting to it from another device
+Other devices on the same network can open it using your computer's local IP address instead
+of `localhost` — for example `http://192.168.1.50:8080`.
+
+The race director's own computer is trusted automatically and needs no password. Another
+device may need a passphrase, which the director sets. See the [FAQ](/guide/faq).
 :::
 
-## First-run orientation
+## What you see on first launch
 
-However you launched it, GridFPV opens on a **home hub** — a small set of top-level pages
-along the top:
+GridFPV opens on a **home screen** with four pages across the top:
 
-- **Pilots** — the people who fly. Add a pilot once here and reuse them across every event.
-- **Classes** — the categories pilots race in (for example *Open* or *Spec*). Defined once,
-  selected per event.
-- **Events** — your race days. This is where you create an event and open its workspace to
-  actually run it.
-- **Timers** — your timing sources. Set up a timer connection once and pick it per event.
+- **Pilots** — the people who fly. Add someone once, then use them at every event.
+- **Classes** — the groups pilots race in, like *Open* or *Spec*. Set up once, picked per event.
+- **Events** — your race days. This is where you make an event and open it to run it.
+- **Timers** — your timing hardware. Set one up once, then pick it per event.
 
-The idea is **configure once, select per event**: your pilots, classes, and timers are
-durable registries you build up over time, and each event just picks from them.
+The idea is **set it up once, pick it per event**. Your pilots, classes and timers build up
+over time. Each event just chooses from those lists.
 
 ### Your first five minutes
 
-1. Open **Pilots** and add a couple of pilots (even just yourself and a friend) so you have
+1. Open **Pilots** and add two or three people, even if it's just you and a friend. You need
    someone to race.
-2. Open **Timers** and add the built-in **Mock** timer. It simulates a real timing source so
-   you can learn the whole flow without any hardware. (See
-   [Connecting a Timer](/guide/timers).)
-3. Open **Events**, create a new event, and open it. You land in the **event workspace** — a
-   sequence of stage pages (Classes & Roster → Rounds & Heats → Race Control → Marshaling →
-   Results, plus Timers and Audit) that walk you through setting up and running the day. A
-   guided setup wizard can do the common path for you.
-4. Schedule a heat, **Stage** it, **Start** it, and watch the Mock timer drive a live race
-   through to a result.
+2. Open **Timers** and use the built-in **Mock** timer. It pretends to be a real timer, so you
+   can learn the whole flow with no hardware at all. See
+   [Connecting a Timer](/guide/timers).
+3. Open **Events**, make a new event, and open it. You land in the **event workspace** — a set
+   of pages down the left that walk you through the day. A setup wizard offers to do the common
+   parts for you.
+4. Make a heat, press **Stage**, then **Start**, and watch the fake timer race it through to a
+   result.
 
-::: tip Bringing real hardware?
-GridFPV races RotorHazard through the **GridFPV RotorHazard plugin**, and it is
-[**required**](/guide/timers#rotorhazard) — stock RotorHazard won't run a heat. You can add,
-connect and test a RotorHazard timer from the **Timers** page without creating an event, and
-GridFPV installs the plugin for you from there. Do that before race day, not at the field.
+That whole loop takes about two minutes and teaches you most of the app.
+
+::: tip Bringing real hardware? Test it at home first.
+GridFPV races RotorHazard timers, but it needs the **GridFPV RotorHazard plugin** installed on
+them. This is [**required**](/guide/timers#rotorhazard) — a plain RotorHazard will not run a
+heat.
+
+You can add a timer, connect to it and install the plugin from the **Timers** page without
+creating an event. Do that at home, not at the field.
 :::
 
-When you are ready for the real thing, head to [Running an Event](/guide/running-an-event)
-for the full walkthrough, [Round Formats](/guide/formats) to choose a structure,
-[Connecting a Timer](/guide/timers) to wire up RotorHazard hardware, and
-[Tuning a Gate](/guide/tuning) to get its detection right.
+## Where to go next
+
+- [Running an Event](/guide/running-an-event) — the full walkthrough of a race day.
+- [Round Formats](/guide/formats) — choosing how your rounds are structured.
+- [Connecting a Timer](/guide/timers) — wiring up RotorHazard.
+- [Tuning a Gate](/guide/tuning) — making the gate detect laps properly.
