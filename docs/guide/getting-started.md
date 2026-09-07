@@ -19,12 +19,16 @@ The desktop app is **one file**. Nothing to install, no database to set up.
 
 ### 1. Download it
 
-Get the file for your computer from the
+Get the download for your computer from the
 [GridFPV releases page](https://github.com/GridFPV/gridfpv/releases):
 
-- **Windows** — `gridfpv-desktop-windows-x86_64.exe`
-- **Linux** — `gridfpv-desktop-linux-x86_64`
-- **macOS** (Apple Silicon) — `gridfpv-desktop-macos-arm64`
+| Your computer | Download | Unzips to |
+| --- | --- | --- |
+| **Windows** | `gridfpv-windows-portable.zip` | `gridfpv-desktop.exe` |
+| **Linux** | `gridfpv-linux-portable.zip` | `gridfpv-desktop` |
+| **macOS** (Apple Silicon) | `gridfpv-macos-portable.zip` | `gridfpv-desktop` |
+
+Each download is a zip with **one file inside**. Unzip it, and that file is GridFPV.
 
 ::: tip Put it somewhere it can stay
 GridFPV saves your race data **in a folder right next to this file**. So put it somewhere
@@ -34,20 +38,20 @@ the app, move the data folder with it.
 
 ### 2. Run it
 
-- **Windows** — double-click the `.exe`. If Windows warns you about an unrecognised app, click
-  **More info → Run anyway**.
+- **Windows** — double-click `gridfpv-desktop.exe`. Windows will warn you about an unrecognised
+  app, because the file isn't signed yet. Click **More info → Run anyway**.
 - **Linux** — make it runnable, then run it:
 
   ```sh
-  chmod +x ./gridfpv-desktop-linux-x86_64
-  ./gridfpv-desktop-linux-x86_64
+  chmod +x ./gridfpv-desktop
+  ./gridfpv-desktop
   ```
 
 - **macOS** — make it runnable, then **right-click → Open** the first time. A normal
-  double-click will be blocked, because the app is not signed by Apple.
+  double-click gets blocked, because the app isn't signed by Apple.
 
   ```sh
-  chmod +x ./gridfpv-desktop-macos-arm64
+  chmod +x ./gridfpv-desktop
   ```
 
 A GridFPV window opens. That is it — you are running.
