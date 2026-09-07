@@ -188,7 +188,7 @@ Bottom-right corner of the screen — for example *GridFPV v0.4.0*. Include it i
 
 ## What's still coming?
 
-GridFPV is actively growing. A few areas are deliberately lighter today:
+GridFPV is still growing. A few areas are thinner today, on purpose:
 
 - **Tournament structures** — bracket builders (single and double elimination), multi-main tiers,
   and round robin — are being rebuilt on top of the three formats and will return. Until then,

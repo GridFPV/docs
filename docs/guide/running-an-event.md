@@ -149,8 +149,8 @@ used to.
   like *2 × Raceband R2 − Raceband R1 = 5732 MHz — lands on Raceband R3*. Or it tells you
   plainly that nothing mixes close to a channel you're using.
 
-**It never stops you saving.** A bad score saves like any other. There's deliberately no
-good/bad verdict, because the best score you can possibly get drops as you add pilots — a
+**It never stops you saving.** A bad score saves like any other. There is no
+good/bad verdict on purpose, because the best score you can get drops as you add pilots — a
 Raceband-only timer genuinely cannot beat 0 with five pilots, and a fixed pass mark would just
 call every six-pilot layout bad.
 

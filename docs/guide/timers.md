@@ -162,7 +162,7 @@ Nothing went wrong with the flying. When a drone sits right in the gate's strong
 video signal bounces off things and reaches the receiver more than once. The gate is doing its
 job — it just did it several times for one pass.
 
-GridFPV deliberately switches off RotorHazard's own filter for this, so **every** crossing
+GridFPV switches off RotorHazard's own filter for this on purpose, so **every** crossing
 reaches GridFPV and GridFPV decides what's real. That means GridFPV needs its own answer, and
 the **same-pass window** is it.
 
