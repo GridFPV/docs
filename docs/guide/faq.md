@@ -194,7 +194,8 @@ GridFPV is still growing. A few areas are thinner today, on purpose:
   and round robin — are being rebuilt on top of the three formats and will return. Until then,
   chain rounds by hand with **From ranking** seeding.
 - **Streaming and broadcast** (overlays, announcer feeds) and an optional **cloud** tier are on
-  the roadmap.
+  the roadmap. The first overlay is here: the timer-in-your-video page for
+  [RaceGOW at Home](/guide/racegow).
 
 We'd rather ship these properly than promise them early. What's written here is what works
 today.

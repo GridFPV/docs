@@ -38,6 +38,7 @@ export default defineConfig({
           { text: 'Round Formats', link: '/guide/formats' },
           { text: 'Connecting a Timer', link: '/guide/timers' },
           { text: 'Tuning a Gate', link: '/guide/tuning' },
+          { text: 'RaceGOW at Home', link: '/guide/racegow' },
           { text: 'FAQ', link: '/guide/faq' }
         ]
       }
@@ -115,6 +116,17 @@ export default defineConfig({
                 },
                 { text: 'Capture from a pass', link: '/guide/tuning#capture-a-level-from-a-pass' },
                 { text: 'When tuning is refused', link: '/guide/tuning#when-tuning-is-refused' }
+              ]
+            },
+            {
+              text: 'RaceGOW at Home',
+              link: '/guide/racegow',
+              collapsed: true,
+              items: [
+                { text: 'Start a track run', link: '/guide/racegow#start-a-track-run' },
+                { text: 'Fly', link: '/guide/racegow#fly' },
+                { text: 'A timer in your video', link: '/guide/racegow#get-a-timer-into-your-video' },
+                { text: 'Send it in', link: '/guide/racegow#send-it-in' }
               ]
             },
             { text: 'FAQ', link: '/guide/faq' }
