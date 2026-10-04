@@ -79,6 +79,12 @@ you put over your recording.
 The overlay shows the run clock, the last few laps, your best 3 this run, and your best 3 today.
 It only reads. Closing OBS never touches your run.
 
+::: tip Pick the colors that show up on your video
+Above the URL, choose **Light text on dark** or **Dark text on light**. Dark works over most
+goggle DVR. Light works over a bright room camera. The URL changes when you pick, so copy it
+after you choose. You can also add `/light` to the end of the URL yourself.
+:::
+
 ::: warning One computer, or two?
 The overlay follows whatever run is open in GridFPV. If OBS runs on a different computer, open
 the console's address on that computer instead of `localhost`. You can find it on the
