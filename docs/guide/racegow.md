@@ -28,8 +28,10 @@ for you.
 
 ## Start a track run
 
-1. On the home screen, click **RaceGOW**.
-2. Fill in the short form:
+1. On the home screen, click **Events**, then **+ New event**. (On a brand-new install the
+   button says **Create your first event**.)
+2. Pick **RaceGOW track run**, then click **Set up track run**. That opens the RaceGOW page.
+3. Fill in the short form:
 
    | Field | What to put |
    | --- | --- |
@@ -38,7 +40,10 @@ for you.
    | **Timer** | Your RotorHazard. (The **Simulator** is there too, for a pretend run.) |
    | **Your channel** | The channel your whoop's video is on. |
 
-3. Click **Set up run**. GridFPV makes an event for this track and opens the run screen.
+4. Click **Set up run**. GridFPV makes an event for this track and opens the run screen.
+
+Your run shows up on the **Events** page like any other event, with a **RaceGOW** tag. Click it
+there to get back to the run screen. The RaceGOW page lists your runs too.
 
 Behind the scenes it is an ordinary event with one **Time Trials** round, scored by **Best of 3
 laps**, with no limit on how many times you fly. You can open it in the full console any time.
