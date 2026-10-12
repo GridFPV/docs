@@ -38,7 +38,7 @@ export default defineConfig({
           { text: 'Round Formats', link: '/guide/formats' },
           { text: 'Connecting a Timer', link: '/guide/timers' },
           { text: 'Tuning a Gate', link: '/guide/tuning' },
-          { text: 'RaceGOW at Home', link: '/guide/racegow' },
+          { text: 'Overlays', link: '/guide/overlays' },
           { text: 'FAQ', link: '/guide/faq' }
         ]
       }
@@ -119,14 +119,13 @@ export default defineConfig({
               ]
             },
             {
-              text: 'RaceGOW at Home',
-              link: '/guide/racegow',
+              text: 'Overlays',
+              link: '/guide/overlays',
               collapsed: true,
               items: [
-                { text: 'Start a track run', link: '/guide/racegow#start-a-track-run' },
-                { text: 'Fly', link: '/guide/racegow#fly' },
-                { text: 'A timer in your video', link: '/guide/racegow#get-a-timer-into-your-video' },
-                { text: 'Send it in', link: '/guide/racegow#send-it-in' }
+                { text: 'Find the overlay', link: '/guide/overlays#find-the-overlay' },
+                { text: 'Put it in OBS', link: '/guide/overlays#put-it-in-obs' },
+                { text: 'A solo run at home', link: '/guide/overlays#timing-a-solo-run-at-home' }
               ]
             },
             { text: 'FAQ', link: '/guide/faq' }

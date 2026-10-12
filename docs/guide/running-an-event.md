@@ -16,6 +16,7 @@ Two more sit below them and you visit those when you need to:
 
 - **Timers** — which timers this event uses, and its channel layouts.
 - **Audit** — the history of every decision made during the event.
+- **Overlays** — pages you put over your video in OBS. See [Overlays](/guide/overlays).
 
 You normally work through the stages in order, but you can go back to any of them at any time.
 There is no separate "edit mode" — setting up the event is just visiting the early stages.

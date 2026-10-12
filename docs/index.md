@@ -45,5 +45,5 @@ no internet, it still runs your whole day.
 - **Planning your rounds?** [Round Formats](/guide/formats) — the three round types and how to chain them.
 - **Plugging in a timer?** [Connecting a Timer](/guide/timers) — the fake timer and RotorHazard.
 - **Gate missing laps?** [Tuning a Gate](/guide/tuning) — get the gate detecting properly.
-- **Flying RaceGOW?** [RaceGOW at Home](/guide/racegow) — time your best 3 laps and put a timer in your video.
+- **Streaming or recording?** [Overlays](/guide/overlays) — put the race clock and laps in your video.
 - **Quick question?** [FAQ](/guide/faq).
